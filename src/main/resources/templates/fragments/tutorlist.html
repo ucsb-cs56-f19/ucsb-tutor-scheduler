@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Tutor List</title>
+</head>
+<body>
+ <h1>Welcome</h1>
+ <br>
+ <h3>Tutor List</h3>
+ <br />
+ <table border="1">
+  <tr>
+   <td>Tutor Name</td>
+   <td>Tutor Email</td>
+   <td>Tutor Open Lab Hours</td>
+  </tr>
+  <tr th:each="tut : ${tutList}">
+   <td th:text="${tut?.name}">name</td>
+   <td th:text="${tut?.email}">email</td>
+   <td th:text="${tut?.labHours}">labHours</td>
+  </tr>
+ </table>
+ <br>
+ <h4>  <p>
+  Click here to add new <a th:href="@{/addTutor}">Tutor</a>
+  </p> </h4>
+</body>

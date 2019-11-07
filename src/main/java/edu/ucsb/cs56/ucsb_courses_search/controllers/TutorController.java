@@ -68,6 +68,7 @@ public class TutorController {
         Tutor tutor = tutorRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid tutor Id:" + id));
         tutorRepository.delete(tutor);
+        model.addAttribute("tutors", tutorRepository.findAll());
         return "index";
     }
 }

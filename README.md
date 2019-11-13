@@ -18,8 +18,8 @@ A project to:
 
 
 To add user to tutor list:
-`curl -d "id=1&fname=phil&lname=conrad&email=pconrad@example.org" -X POST http://localhost:8080/tutors/add`
+`curl -d "id=1&fname=phil&lname=conrad&email=pconrad@example.org" -X POST http://localhost:8080/tutors`
 
 
 To add user to Course Offerings List
-`curl -d "id=1&course=CS56&quarter=W19&instructor=pConrad" -X POST http://localhost:8080/courseOffering/add`
+`curl -d "id=1&course=CS56&quarter=W19&instructor=pConrad" -X POST http://localhost:8080/courseOfferings/add`

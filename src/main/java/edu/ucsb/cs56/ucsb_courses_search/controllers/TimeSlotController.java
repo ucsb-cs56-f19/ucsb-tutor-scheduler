@@ -33,11 +33,12 @@ public class TimeSlotController {
         return "timeSlots/create";
     }
 
-    @PostMapping("/timeSlots")
+    @PostMapping("/timeSlots/add")
     public String addTimeSlot(@Valid TimeSlot timeSlot, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            return "timeSlots/create";
-        }
+        // if (result.hasErrors()) {
+        //     return "timeSlots/create";
+        // }
+        result.hasErrors();
 
         timeSlotRepository.save(timeSlot);
         model.addAttribute("timeSlots", timeSlotRepository.findAll());

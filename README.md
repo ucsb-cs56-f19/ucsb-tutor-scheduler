@@ -23,3 +23,6 @@ To add user to tutor list:
 
 To add user to Course Offerings List
 `curl -d "id=1&course=CS56&quarter=W19&instructor=pConrad" -X POST http://localhost:8080/courseOfferings/add`
+
+To add time slot to Time Slot List
+`curl -d "id=1&startTime=04:00PM&endTime=06:00PM" -X POST http://localhost:8080/timeSlots/add`

@@ -44,6 +44,14 @@ public class TutorController {
         return "index";
     }
 
+    @GetMapping("/tutors/show/{id}")
+    public String show(@PathVariable("id") long id, Model model) {
+        Tutor tutor = tutorRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid tutor Id:" + id));
+        model.addAttribute("tutor", tutor);
+        return "tutors/show";
+    }
+
     @GetMapping("/tutors/edit/{id}")
     public String showUpdateForm(@PathVariable("id") long id, Model model) {
         Tutor tutor = tutorRepository.findById(id)

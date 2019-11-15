@@ -14,10 +14,10 @@ public class TimeSlot {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    //@NotBlank(message = "Start time is mandatory")
+    @NotBlank(message = "Start time is mandatory (e.g. 06:00PM)")
     private String startTime;
 
-    //@NotBlank(message = "End time is mandatory")
+    @NotBlank(message = "End time is mandatory (e.g. 06:00PM)")
     private String endTime;
 
     public TimeSlot() {

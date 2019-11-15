@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 
 import edu.ucsb.cs56.ucsb_courses_search.repositories.TutorRepository;
 import edu.ucsb.cs56.ucsb_courses_search.repositories.CourseOfferingRepository;
+import edu.ucsb.cs56.ucsb_courses_search.repositories.TutorAssignmentRepository;
 import edu.ucsb.cs56.ucsb_courses_search.entities.Tutor;
+import edu.ucsb.cs56.ucsb_courses_search.entities.TutorAssignment;
 import edu.ucsb.cs56.ucsb_courses_search.entities.CourseOffering;
 import java.util.List;
 
@@ -15,12 +17,14 @@ public class RepositoryControllerAdvice {
 
     private final TutorRepository tutorRepository;
     private final CourseOfferingRepository courseOfferingRepository;
+    private final TutorAssignmentRepository tutorAssignmentRepository;
 
     @Autowired
     public RepositoryControllerAdvice(TutorRepository tutorRepository,
-            CourseOfferingRepository courseOfferingRepository) {
+            CourseOfferingRepository courseOfferingRepository, TutorAssignmentRepository tutorAssignmentRepository) {
         this.tutorRepository = tutorRepository;
         this.courseOfferingRepository = courseOfferingRepository;
+        this.tutorAssignmentRepository = tutorAssignmentRepository;
     }
 
     @ModelAttribute("tutors")
@@ -31,5 +35,10 @@ public class RepositoryControllerAdvice {
     @ModelAttribute("courseOfferings")
     public Iterable<CourseOffering> getCourseOfferings() {
         return courseOfferingRepository.findAll();
+    }
+
+    @ModelAttribute("tutorAssignments")
+    public Iterable<TutorAssignment> getTutorAssignments() {
+        return tutorAssignmentRepository.findAll();
     }
 }

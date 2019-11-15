@@ -1,16 +1,19 @@
 package edu.ucsb.cs56.ucsb_courses_search.entities;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
 @Entity
 public class CourseOffering {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotBlank(message = "Course is mandatory (e.g. CMPSC 32)")
@@ -21,6 +24,9 @@ public class CourseOffering {
 
     @NotBlank(message = "Instructor is mandatory (e.g. Mirza)")
     private String instructor;
+
+    @OneToMany(mappedBy = "courseOffering")
+    private Set<TutorAssignment> tutorAssignments;
 
     public CourseOffering() {
     }
@@ -37,6 +43,10 @@ public class CourseOffering {
 
     public long getId() {
         return id;
+    }
+
+    public Set<TutorAssignment> getTutorAssignments() {
+        return tutorAssignments;
     }
 
     public void setCourse(String course) {

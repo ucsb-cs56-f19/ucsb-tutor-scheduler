@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Add Tutor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+      integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../css/shards.min.css" />
+  </head>
+
+  <body>
+    <div class="container my-5">
+      <h2 class="mb-5">Show Tutor</h2>
+      <div class="row">
+        <div class="col-md-6">
+          <form action="#" th:object="${tutor}">
+            <div th:replace="tutors/readOnlyForm.html"></div>
+          </form>
+        </div>
+      </div>
+
+      <div th:switch="${tutor.tutorAssignments}" class="container my-5">
+        <div class="row">
+          <div class="col-md-6">
+            <h2 th:case="null">No tutor assignments</h2>
+            <div th:case="*">
+              <h2 class="my-5">Tutor assignments</h2>
+              <table class="table table-striped table-responsive-md">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Course</th>
+                    <th>Quarter</th>
+                    <th>Instructor</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="a : ${tutor.tutorAssignments}">
+                    <td th:text="${a.id}"></td>
+                    <td th:text="${a.courseOffering.course}"></td>
+                    <td th:text="${a.courseOffering.quarter}"></td>
+                    <td th:text="${a.courseOffering.instructor}"></td>
+                    <td>
+                      <a
+                        th:href="@{/tutorAssignments/edit/{id}(id=${a.id})}"
+                        class="btn btn-primary"
+                        ><i class="fas fa-user-edit ml-2"></i
+                      ></a>
+                    </td>
+                    <td>
+                      <a
+                        th:href="@{/tutorAssignments/delete/{id}(id=${a.id})}"
+                        class="btn btn-primary"
+                        ><i class="fas fa-user-times ml-2"></i
+                      ></a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!--  th:case -->
+          </div>
+          <!-- col -->
+        </div>
+        <!-- row -->
+      </div>
+      <!-- th:switch -->
+
+      <div th:switch="${courseOfferings}" class="container my-5">
+        <div class="row">
+          <div class="col-md-6">
+            <h2 th:case="null">No course offerings yet!</h2>
+            <div th:case="*">
+              <h2 class="my-5">Course Offerings to Assign</h2>
+              <table class="table table-striped table-responsive-md">
+                <thead>
+                  <tr>
+                    <th>Course</th>
+                    <th>Quarter</th>
+                    <th>Instructor</th>
+                    <th>Assign</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="co : ${courseOfferings}">
+                    <td th:text="${co.course}"></td>
+                    <td th:text="${co.quarter}"></td>
+                    <td th:text="${co.instructor}"></td>
+                    <td>
+                      <form
+                        method="POST"
+                        action="#"
+                        th:action="@{/tutorAssignments/add}"
+                      >
+                        <input
+                          type="submit"
+                          class="btn btn-primary"
+                          value="Assign Tutor"
+                        />
+                        <input
+                          type="hidden"
+                          th:value="${tutor.id}"
+                          name="tid"
+                        />
+                        <input type="hidden" th:value="${co.id}" name="cid" />
+                      </form>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- container -->
+  </body>
+</html>

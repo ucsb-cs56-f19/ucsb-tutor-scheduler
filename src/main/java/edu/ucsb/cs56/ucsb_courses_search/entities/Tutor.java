@@ -1,16 +1,19 @@
 package edu.ucsb.cs56.ucsb_courses_search.entities;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Tutor {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @NotBlank(message = "First Name is mandatory")
     private String fname;
@@ -20,6 +23,9 @@ public class Tutor {
 
     @NotBlank(message = "Email is mandatory")
     private String email;
+
+    @OneToMany(mappedBy = "tutor")
+    private Set<TutorAssignment> tutorAssignments;
 
     public Tutor() {
     }
@@ -36,6 +42,10 @@ public class Tutor {
 
     public long getId() {
         return id;
+    }
+
+    public Set<TutorAssignment> getTutorAssignments() {
+        return tutorAssignments;
     }
 
     public void setFname(String fname) {

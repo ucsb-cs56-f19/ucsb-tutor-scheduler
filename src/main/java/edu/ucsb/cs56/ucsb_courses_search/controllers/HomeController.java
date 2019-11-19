@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import edu.ucsb.cs56.ucsb_courses_search.entities.Tutor;
 import edu.ucsb.cs56.ucsb_courses_search.repositories.TutorRepository;
 import edu.ucsb.cs56.ucsb_courses_search.repositories.CourseOfferingRepository;
+import edu.ucsb.cs56.ucsb_courses_search.repositories.TimeSlotRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,11 +25,15 @@ public class HomeController {
 
     private final TutorRepository tutorRepository;
     private final CourseOfferingRepository courseOfferingRepository;
+    private final TimeSlotRepository timeSlotRepository;
+
 
     @Autowired
-    public HomeController(TutorRepository tutorRepository, CourseOfferingRepository courseOfferingRepository) {
+    public HomeController(TutorRepository tutorRepository, CourseOfferingRepository courseOfferingRepository,
+        TimeSlotRepository timeSlotRepository) {
         this.tutorRepository = tutorRepository;
         this.courseOfferingRepository = courseOfferingRepository;
+        this.timeSlotRepository = timeSlotRepository;
     }
 
     @GetMapping("/")

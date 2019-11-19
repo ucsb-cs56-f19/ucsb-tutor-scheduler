@@ -127,6 +127,52 @@
         </div>
       </div>
     </div>
+
+    <div th:switch="${timeSlots}" class="container my-5">
+      <div class="row">
+        <div class="col-md-6">
+          <h2 th:case="null">No time slots yet!</h2>
+          <div th:case="*">
+            <h2 class="my-5">Time Slots</h2>
+            <table class="table table-striped table-responsive-md">
+              <thead>
+                <tr>
+                  <th>Start Time</th>
+                  <th>End Time</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="timeSlot : ${timeSlots}">
+                  <td th:text="${timeSlot.startTime}"></td>
+                  <td th:text="${timeSlot.endTime}"></td>
+                  <td>
+                    <a
+                      th:href="@{/timeSlots/edit/{id}(id=${timeSlot.id})}"
+                      class="btn btn-primary"
+                      ><i class="fas fa-user-edit ml-2"></i
+                    ></a>
+                  </td>
+                  <td>
+                    <a
+                      th:href="@{/timeSlots/delete/{id}(id=${timeSlot.id})}"
+                      class="btn btn-primary"
+                      ><i class="fas fa-user-times ml-2"></i
+                    ></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="my-5">
+            <a href="/timeSlots/create" class="btn btn-primary"
+              ><i class="fas fa-user-plus ml-2"></i
+            ></a>
+          </p>
+        </div>
+      </div>
+    </div>
     <div th:switch="${tutorAssignments}" class="container my-5">
       <div class="row">
         <div class="col-md-6">

@@ -236,11 +236,11 @@
                 </thead>
                 <tbody>
                   <tr th:each="rm : ${roomsModel}">
-                    <td th:text="${rm.bname}"></td>
-                    <td th:text="${rm.rnum}"></td>
+                    <td th:text="${rm.buildingname}"></td>
+                    <td th:text="${rm.roomNumber}"></td>
                     <td>
                       <a
-                        th:href="@{/rooms/edit/{id}(id=${rm.rnum})}"
+                        th:href="@{/rooms/edit/{id}(id=${rm.roomNumber})}"
                         class="btn btn-primary"
                         ><i class="fas fa-user-edit ml-2"></i
                       ></a>

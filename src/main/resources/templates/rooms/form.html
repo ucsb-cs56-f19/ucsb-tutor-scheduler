@@ -1,48 +1,32 @@
-<div class="row">
+    <div class="row">
         <div class="form-group col-md-6">
-          <label for="bname" class="col-form-label">First Name</label>
+          <label for="buildingName" class="col-form-label">First Name</label>
           <input
             type="text"
-            th:field="*{bname}"
+            th:field="*{buildingName}"
             class="form-control"
-            id="bname"
+            id="buildingName"
             placeholder="First Name"
           />
           <span
-            th:if="${#fields.hasErrors('bname')}"
-            th:errors="*{bname}"
-            class="text-danger"
-          ></span>
-        </div>
-        <!-- <div class="form-group col-md-6">
-          <label for="lname" class="col-form-label">Last Name</label>
-          <input
-            type="text"
-            th:field="*{lname}"
-            class="form-control"
-            id="lname"
-            placeholder="Last Name"
-          />
-          <span
-            th:if="${#fields.hasErrors('lname')}"
-            th:errors="*{lname}"
+            th:if="${#fields.hasErrors('buildingName')}"
+            th:errors="*{buildingname}"
             class="text-danger"
           ></span>
         </div>
         <div class="form-group col-md-6">
-          <label for="email" class="col-form-label">Email</label>
+          <label for="roomNumber" class="col-form-label">Room Number</label>
           <input
             type="text"
-            th:field="*{email}"
+            th:field="*{roomNumber}"
             class="form-control"
-            id="email"
-            placeholder="Email"
+            id="roomNumber"
+            placeholder="Room Number"
           />
           <span
-            th:if="${#fields.hasErrors('email')}"
-            th:errors="*{email}"
+            th:if="${#fields.hasErrors('roomNumber')}"
+            th:errors="*{roomNumber}"
             class="text-danger"
           ></span>
-        </div> -->
-      </div>
+        </div>
       

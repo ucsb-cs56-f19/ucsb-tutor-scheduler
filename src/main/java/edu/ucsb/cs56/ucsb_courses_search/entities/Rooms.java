@@ -16,17 +16,17 @@ public class Rooms {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @NotBlank(message = "Building Name is mandatory")
-    private String bname;
+    private String buildingName;
 
     @NotBlank(message = "Room Number is mandatory")
-    private int rnum;
+    private int roomNumber;
 
     public Rooms() {
     }
 
-    public Rooms(String bname, int rnum) {
-        this.bname = bname;
-        this.rnum = rnum;
+    public Rooms(String buildingName, int roomNumber) {
+        this.buildingName = buildingName;
+        this.roomNumber = roomNumber;
     }
 
     public void setId(long id) {
@@ -37,24 +37,24 @@ public class Rooms {
         return id;
     }
 
-    public void setBname(String bname) {
-        this.bname = bname;
+    public void setbuildingName(String buildingName) {
+        this.buildingName = buildingName;
     }
 
-    public void setRnum(int rnum) {
-        this.rnum = rnum;
+    public void setroomNumber(int roomNumber) {
+        this.roomNumber = roomNumber;
     }
 
-    public String getBname() {
-        return bname;
+    public String getbuildingName() {
+        return buildingName;
     }
 
-    public int getRnum() {
-        return rnum;
+    public int getroomNumber() {
+        return roomNumber;
     }
 
     @Override
     public String toString() {
-        return "Room{" + "id=" + id + ", bname=" + bname + ", rnum=" + rnum + '}';
+        return "Room{" + "id=" + id + ", buildingName=" + buildingName + ", roomNumber=" + roomNumber + '}';
     }
 }

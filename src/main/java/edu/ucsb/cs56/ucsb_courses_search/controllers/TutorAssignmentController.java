@@ -49,7 +49,6 @@ public class TutorAssignmentController {
     }
     return isAssignedQuarter;
   }
-
   @PostMapping("/tutorAssignments/add")
   public String add(@RequestParam(name = "cid") long cid, @RequestParam(name = "tid") long tid, Model model) {
     Tutor tutor = tutorRepository.findById(tid)

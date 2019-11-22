@@ -49,12 +49,12 @@ public class TutorControllerUnitTest {
 
         when(mockedBindingResult.hasErrors()).thenReturn(true);
 
-        assertThat(tutorController.addTutor(tutor, mockedBindingResult, mockedModel)).isEqualTo("add-tutor");
+        assertThat(tutorController.addTutor(tutor, mockedBindingResult, mockedModel)).isEqualTo("tutors/create");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void whenCalledshowUpdateForm_thenIllegalArgumentException() {
-        assertThat(tutorController.showUpdateForm(0, mockedModel)).isEqualTo("update-tutor");
+        assertThat(tutorController.showUpdateForm(0, mockedModel)).isEqualTo("tutors/update");
     }
 
     @Test
@@ -72,7 +72,7 @@ public class TutorControllerUnitTest {
 
         when(mockedBindingResult.hasErrors()).thenReturn(true);
 
-        assertThat(tutorController.updateTutor(1l, tutor, mockedBindingResult, mockedModel)).isEqualTo("update-tutor");
+        assertThat(tutorController.updateTutor(1l, tutor, mockedBindingResult, mockedModel)).isEqualTo("tutors/update");
     }
 
     @Test(expected = IllegalArgumentException.class)

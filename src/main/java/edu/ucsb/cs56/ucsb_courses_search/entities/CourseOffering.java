@@ -14,7 +14,7 @@ public class CourseOffering {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @NotBlank(message = "Course is mandatory (e.g. CMPSC 32)")
     private String course;
@@ -77,5 +77,22 @@ public class CourseOffering {
     public String toString() {
         return "CourseOffering{" + "id=" + id + ", course=" + course + ", quarter=" + quarter + ", instructor="
                 + instructor + '}';
+    }
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        CourseOffering c2 = (CourseOffering) obj;
+        if (id == null) {
+            if (c2.id != null)
+                return false;
+        } else if (!(id.equals(c2.id)))
+            return false;
+
+        return true;
     }
 }

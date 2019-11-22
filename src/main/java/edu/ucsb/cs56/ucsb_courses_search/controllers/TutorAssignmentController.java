@@ -18,6 +18,8 @@ import edu.ucsb.cs56.ucsb_courses_search.repositories.CourseOfferingRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Iterator;
+
 @Controller
 public class TutorAssignmentController {
 
@@ -35,14 +37,26 @@ public class TutorAssignmentController {
     this.courseOfferingRepository = courseOfferingRepository;
   }
 
+
   @PostMapping("/tutorAssignments/add")
   public String add(@RequestParam(name = "cid") long cid, @RequestParam(name = "tid") long tid, Model model) {
     Tutor tutor = tutorRepository.findById(tid)
         .orElseThrow(() -> new IllegalArgumentException("Invalid tutor Id:" + tid));
     CourseOffering courseOffering = courseOfferingRepository.findById(cid)
         .orElseThrow(() -> new IllegalArgumentException("Invalid course offering Id:" + cid));
-    TutorAssignment tutorAssignment = new TutorAssignment(tutor, courseOffering);
-    tutorAssignmentRepository.save(tutorAssignment);
+
+    boolean flag = false;
+    Iterator<TutorAssignment> iter = tutor.getTutorAssignments().iterator();
+    while(iter.hasNext()){
+      if((courseOffering.getQuarter()).equals((iter.next().getCourseOffering().getQuarter()))){
+        flag = true;
+      }
+    }
+
+    if(flag == false) {
+      TutorAssignment TutorAssignment = new TutorAssignment(tutor, courseOffering);
+      tutorAssignmentRepository.save(TutorAssignment);
+    }
     model.addAttribute("tutorAssignments", tutorAssignmentRepository.findAll());
     return "index";
   }

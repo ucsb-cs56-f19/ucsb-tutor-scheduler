@@ -3,10 +3,7 @@ package edu.ucsb.cs56.ucsb_courses_search.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import edu.ucsb.cs56.ucsb_courses_search.entities.TutorAssignment;
 import edu.ucsb.cs56.ucsb_courses_search.entities.Tutor;
@@ -44,14 +41,14 @@ public class TutorAssignmentController {
         .orElseThrow(() -> new IllegalArgumentException("Invalid tutor Id:" + tid));
     CourseOffering courseOffering = courseOfferingRepository.findById(cid)
         .orElseThrow(() -> new IllegalArgumentException("Invalid course offering Id:" + cid));
-
+    
     boolean isAssignedQuarter = false;
 
     Iterator<TutorAssignment> iter = tutor.getTutorAssignments().iterator();
     for(Iterator<TutorAssignment> it = iter; it.hasNext();) {
       TutorAssignment assignment = it.next();
       if(courseOffering.getQuarter().equals(assignment.getCourseOffering().getQuarter())){
-        isAssignedQuarter = true;
+          isAssignedQuarter = true;
       }
     }
 

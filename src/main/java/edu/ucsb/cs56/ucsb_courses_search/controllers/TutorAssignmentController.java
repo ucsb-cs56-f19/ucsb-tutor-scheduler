@@ -3,10 +3,7 @@ package edu.ucsb.cs56.ucsb_courses_search.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import edu.ucsb.cs56.ucsb_courses_search.entities.TutorAssignment;
 import edu.ucsb.cs56.ucsb_courses_search.entities.Tutor;
@@ -44,20 +41,24 @@ public class TutorAssignmentController {
         .orElseThrow(() -> new IllegalArgumentException("Invalid tutor Id:" + tid));
     CourseOffering courseOffering = courseOfferingRepository.findById(cid)
         .orElseThrow(() -> new IllegalArgumentException("Invalid course offering Id:" + cid));
+    boolean isAssignedQuarter = false;
 
-    boolean flag = false;
     Iterator<TutorAssignment> iter = tutor.getTutorAssignments().iterator();
     while(iter.hasNext()){
-      if((courseOffering.getQuarter()).equals((iter.next().getCourseOffering().getQuarter()))){
-        flag = true;
+      if(courseOffering.getQuarter().equals(iter.next().getCourseOffering().getQuarter())){
+        isAssignedQuarter = true;
       }
     }
 
-    if(flag == false) {
+    if(isAssignedQuarter == false) {
       TutorAssignment TutorAssignment = new TutorAssignment(tutor, courseOffering);
       tutorAssignmentRepository.save(TutorAssignment);
+      model.addAttribute("tutorAssignments", tutorAssignmentRepository.findAll());
+      return "index";
     }
-    model.addAttribute("tutorAssignments", tutorAssignmentRepository.findAll());
+
+    final String errorIsAssignedQuarter = "Tutor is already assigned a course";
+    model.addAttribute("errorIsAssignedQuarter", errorIsAssignedQuarter);
     return "index";
   }
 

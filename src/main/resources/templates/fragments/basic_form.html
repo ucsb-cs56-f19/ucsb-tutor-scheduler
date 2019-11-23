@@ -80,6 +80,7 @@
               <a href="/tutors/create" class="btn btn-primary"
                 ><i class="fas fa-user-plus ml-2"></i
               ></a>
+              <button type="submit" th:formaction="@{/searchCSV}" class="btn btn-primary" id="js-tutors-csv">Download CSV</button>
               <form method="POST" action="/tutorCSVUpload" enctype="multipart/form-data">
                 <input type="file" name="file" accept=".csv"/> <br/><br/>
                 <button type="submit">Submit</button>

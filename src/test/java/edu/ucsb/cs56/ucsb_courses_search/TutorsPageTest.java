@@ -37,7 +37,8 @@ import edu.ucsb.cs56.ucsb_courses_search.controllers.TutorAssignmentController;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.authentication;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(TutorController.class)
+@SpringBootTest
+@AutoConfigureMockMvc
 public class TutorsPageTest {
 
     @Autowired
@@ -92,7 +93,7 @@ public class TutorsPageTest {
             .with(authentication(OAuthUtils.getOauthAuthenticationFor(principal)))
             .accept(MediaType.TEXT_HTML))
             .andExpect(status().isOk())
-            .andExpect(xpath("/html/body/div/div[1]/div/div/p/a").exists());
+            .andExpect(xpath("/html/body/div/div/div/form/input[2]").exists());
 
 
 

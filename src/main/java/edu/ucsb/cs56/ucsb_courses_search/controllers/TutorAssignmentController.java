@@ -41,7 +41,7 @@ public class TutorAssignmentController {
         .orElseThrow(() -> new IllegalArgumentException("Invalid tutor Id:" + tid));
     CourseOffering courseOffering = courseOfferingRepository.findById(cid)
         .orElseThrow(() -> new IllegalArgumentException("Invalid course offering Id:" + cid));
-    
+
     boolean isAssignedQuarter = false;
 
     Iterator<TutorAssignment> iter = tutor.getTutorAssignments().iterator();

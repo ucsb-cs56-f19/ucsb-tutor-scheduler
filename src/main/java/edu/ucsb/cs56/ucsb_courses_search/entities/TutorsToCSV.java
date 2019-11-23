@@ -33,7 +33,7 @@ public class TutorsToCSV {
 
                 csvWriter.writeNext(data);
             }
-
+            csvWriter.close();
             System.out.println("Write CSV using CSVWriter successfully!");
         } catch (Exception e) {
             System.out.println("Writing CSV error!");

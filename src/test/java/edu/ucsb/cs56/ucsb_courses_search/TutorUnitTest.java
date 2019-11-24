@@ -54,6 +54,6 @@ public class TutorUnitTest {
     @Test
     public void whenCalledtoString_thenCorrect() {
         Tutor tutor = new Tutor("Julie", "Smith", "julie@domain.com", "PAID");
-        assertThat(tutor.toString()).isEqualTo("Tutor{id=0, fname=Julie, lname=Smith, email=julie@domain.com}");
+        assertThat(tutor.toString()).isEqualTo("Tutor{id=0, fname=Julie, lname=Smith, email=julie@domain.com, level=PAID}");
     }
 }

@@ -28,7 +28,6 @@ except Exception as e:
   print(type(e),e.args)
   sys.exit(2)
 
-  
 # https://stackoverflow.com/questions/89228/calling-an-external-command-in-python
 
 addl_args = ""

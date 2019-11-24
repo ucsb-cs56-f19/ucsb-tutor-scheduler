@@ -21,6 +21,9 @@
   </head>
   <body>
     <h1>Tutor Management System Proof of Concept</h1>
+    <div class="alert alert-danger" th:if="${errorIsAssignedQuarter}">
+      Cannot assign a tutor to more than one course in a given quarter!
+    </div>
     <div th:switch="${tutors}" class="container my-5">
       <div class="row">
         <div class="col-md-6">

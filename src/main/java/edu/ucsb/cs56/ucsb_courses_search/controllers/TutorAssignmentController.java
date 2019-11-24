@@ -3,10 +3,7 @@ package edu.ucsb.cs56.ucsb_courses_search.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import edu.ucsb.cs56.ucsb_courses_search.entities.TutorAssignment;
 import edu.ucsb.cs56.ucsb_courses_search.entities.Tutor;
@@ -17,6 +14,8 @@ import edu.ucsb.cs56.ucsb_courses_search.repositories.CourseOfferingRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Iterator;
 
 @Controller
 public class TutorAssignmentController {
@@ -35,15 +34,31 @@ public class TutorAssignmentController {
     this.courseOfferingRepository = courseOfferingRepository;
   }
 
+
   @PostMapping("/tutorAssignments/add")
   public String add(@RequestParam(name = "cid") long cid, @RequestParam(name = "tid") long tid, Model model) {
     Tutor tutor = tutorRepository.findById(tid)
         .orElseThrow(() -> new IllegalArgumentException("Invalid tutor Id:" + tid));
     CourseOffering courseOffering = courseOfferingRepository.findById(cid)
         .orElseThrow(() -> new IllegalArgumentException("Invalid course offering Id:" + cid));
-    TutorAssignment tutorAssignment = new TutorAssignment(tutor, courseOffering);
-    tutorAssignmentRepository.save(tutorAssignment);
-    model.addAttribute("tutorAssignments", tutorAssignmentRepository.findAll());
+    boolean isAssignedQuarter = false;
+
+    Iterator<TutorAssignment> iter = tutor.getTutorAssignments().iterator();
+    while(iter.hasNext()){
+      if(courseOffering.getQuarter().equals(iter.next().getCourseOffering().getQuarter())){
+        isAssignedQuarter = true;
+      }
+    }
+
+    if(isAssignedQuarter == false) {
+      TutorAssignment TutorAssignment = new TutorAssignment(tutor, courseOffering);
+      tutorAssignmentRepository.save(TutorAssignment);
+      model.addAttribute("tutorAssignments", tutorAssignmentRepository.findAll());
+      return "index";
+    }
+
+    final String errorIsAssignedQuarter = "Tutor is already assigned a course";
+    model.addAttribute("errorIsAssignedQuarter", errorIsAssignedQuarter);
     return "index";
   }
 

@@ -21,7 +21,7 @@ public class CSVDownloadController {
     @Autowired
     TutorRepository tutorRepository;
 
-    @GetMapping("/tutorCSV")
+    @GetMapping("/tutorCSVDownload")
     public void downloadCSV(HttpServletResponse response) throws IOException{
         response.setContentType("text/csv");
         response.setHeader("Content-Disposition", "attachment; file=tutors.csv");

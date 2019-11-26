@@ -11,10 +11,10 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Tutor {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @NotBlank(message = "First Name is mandatory")
     private String fname;
 
@@ -27,13 +27,18 @@ public class Tutor {
     @OneToMany(mappedBy = "tutor")
     private Set<TutorAssignment> tutorAssignments;
 
+    @NotBlank(message = "Level is mandatory")
+    private String level;
+
+
     public Tutor() {
     }
 
-    public Tutor(String fname, String lname, String email) {
+    public Tutor(String fname, String lname, String email, String level) {
         this.fname = fname;
         this.lname = lname;
         this.email = email;
+        this.level = level;
     }
 
     public void setId(long id) {
@@ -60,6 +65,14 @@ public class Tutor {
         this.email = email;
     }
 
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
     public String getFname() {
         return fname;
     }
@@ -74,6 +87,6 @@ public class Tutor {
 
     @Override
     public String toString() {
-        return "Tutor{" + "id=" + id + ", fname=" + fname + ", lname=" + lname + ", email=" + email + '}';
+        return "Tutor{" + "id=" + id + ", fname=" + fname + ", lname=" + lname + ", email=" + email + ", level=" + level + '}';
     }
 }

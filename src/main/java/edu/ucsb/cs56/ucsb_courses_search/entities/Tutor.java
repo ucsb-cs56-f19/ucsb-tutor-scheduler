@@ -24,16 +24,20 @@ public class Tutor {
     @NotBlank(message = "Email is mandatory")
     private String email;
 
+    @NotBlank(message = "Level is mandatory")
+    private String level;
+
     @OneToMany(mappedBy = "tutor")
     private Set<TutorAssignment> tutorAssignments;
 
     public Tutor() {
     }
 
-    public Tutor(String fname, String lname, String email) {
+    public Tutor(String fname, String lname, String email, String level) {
         this.fname = fname;
         this.lname = lname;
         this.email = email;
+        this.level = level;
     }
 
     public void setId(long id) {
@@ -48,6 +52,9 @@ public class Tutor {
         return tutorAssignments;
     }
 
+    public void setLevel(String level) {
+        this.level = level;
+    }
     public void setFname(String fname) {
         this.fname = fname;
     }
@@ -58,6 +65,10 @@ public class Tutor {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getLevel() {
+        return level;
     }
 
     public String getFname() {
@@ -74,6 +85,6 @@ public class Tutor {
 
     @Override
     public String toString() {
-        return "Tutor{" + "id=" + id + ", fname=" + fname + ", lname=" + lname + ", email=" + email + '}';
+        return "Tutor{" + "id=" + id + ", fname=" + fname + ", lname=" + lname + ", email=" + email + ", level=" + level + '}';
     }
 }

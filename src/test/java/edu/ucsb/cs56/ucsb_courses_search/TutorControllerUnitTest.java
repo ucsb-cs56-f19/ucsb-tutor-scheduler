@@ -30,13 +30,13 @@ public class TutorControllerUnitTest {
 
     @Test
     public void whenCalledAdd_thenCorrect() {
-        Tutor tutor = new Tutor("John", "Smith", "john@domain.com");
+        Tutor tutor = new Tutor("John", "Smith", "john@domain.com", "190J");
         assertThat(tutorController.create(tutor)).isEqualTo("tutors/create");
     }
 
     @Test
     public void whenCalledaddTutorAndValidTutor_thenCorrect() {
-        Tutor tutor = new Tutor("John", "Smith", "john@domain.com");
+        Tutor tutor = new Tutor("John", "Smith", "john@domain.com", "190J");
 
         when(mockedBindingResult.hasErrors()).thenReturn(false);
 
@@ -45,7 +45,7 @@ public class TutorControllerUnitTest {
 
     @Test
     public void whenCalledaddTutorAndInValidTutor_thenCorrect() {
-        Tutor tutor = new Tutor("John", "Smith", "john@domain.com");
+        Tutor tutor = new Tutor("John", "Smith", "john@domain.com", "190J");
 
         when(mockedBindingResult.hasErrors()).thenReturn(true);
 
@@ -59,7 +59,7 @@ public class TutorControllerUnitTest {
 
     @Test
     public void whenCalledupdateTutorAndValidTutor_thenCorrect() {
-        Tutor tutor = new Tutor("John", "Smith", "john@domain.com");
+        Tutor tutor = new Tutor("John", "Smith", "john@domain.com", "190J");
 
         when(mockedBindingResult.hasErrors()).thenReturn(false);
 
@@ -68,7 +68,7 @@ public class TutorControllerUnitTest {
 
     @Test
     public void whenCalledupdateTutorAndInValidTutor_thenCorrect() {
-        Tutor tutor = new Tutor("John", "Smith", "john@domain.com");
+        Tutor tutor = new Tutor("John", "Smith", "john@domain.com", "190J");
 
         when(mockedBindingResult.hasErrors()).thenReturn(true);
 
@@ -79,4 +79,5 @@ public class TutorControllerUnitTest {
     public void whenCalleddeleteTutor_thenIllegalArgumentException() {
         assertThat(tutorController.deleteTutor(1l, mockedModel)).isEqualTo("index");
     }
+
 }

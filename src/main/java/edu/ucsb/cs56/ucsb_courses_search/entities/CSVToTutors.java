@@ -21,8 +21,6 @@ import java.util.List;
 import java.util.Iterator;
 
 public class CSVToTutors {
-    private static Logger logger = LoggerFactory.getLogger(CSVToTutors.class);
-
     public static List<Tutor> tutorBuilder(MultipartFile file) throws Exception {
         try {
             Reader reader = Files.newBufferedReader(Paths.get("/Users/Tanay/tutorCSV.csv"));
@@ -44,8 +42,6 @@ public class CSVToTutors {
                 TutorBean tutorBean = csvTutorIterator.next();
                 Tutor tutor = new Tutor(tutorBean);
                 tutors.add(tutor);
-                //logger.info(tutor.toString());
-                //logger.info(tutorBean.getId() + " " + tutorBean.getFname() + " " + tutorBean.getLname() + " " + tutorBean.getEmail());
             }
             return tutors;
         } catch (IOException e) {

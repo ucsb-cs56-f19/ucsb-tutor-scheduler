@@ -6,6 +6,7 @@ import edu.ucsb.cs56.ucsb_courses_search.entities.TutorBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -85,17 +86,14 @@ public class TutorController {
         model.addAttribute("tutors", tutorRepository.findAll());
         return "index";
     }
-    @RequestMapping(value = "/tutorCSVUpload", method = RequestMethod.POST)
-    public String uploadCSV(@RequestParam("file") MultipartFile file,
-                          RedirectAttributes redirectAttributes) throws Exception {
+    @RequestMapping(path = "/tutorCSVUpload", method = RequestMethod.POST)
+    public String uploadCSV(@RequestParam("file") MultipartFile file, Model model) throws Exception {
         logger.info(file.getName());
         if (file.isEmpty()) {
-            redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
-            logger.info("File is empty");
             return "index";
         }
         try{
-            logger.info("Made it to upload");
+            model.addAttribute("file", file);
             List<TutorBean> tutors = CSVToTutors.tutorBuilder(file.getName());
         } catch (IOException e) {
             e.printStackTrace();

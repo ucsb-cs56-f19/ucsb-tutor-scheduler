@@ -25,7 +25,7 @@ public class CSVToTutors {
 
             ColumnPositionMappingStrategy strategy = new ColumnPositionMappingStrategy();
             strategy.setType(TutorBean.class);
-            String[] memberFieldsToBindTo = {"id", "firstname", "lastname", "email"};
+            String[] memberFieldsToBindTo = {"id", "firstname", "lastname", "email", "level"};
             strategy.setColumnMapping(memberFieldsToBindTo);
 
             CsvToBean<TutorBean> csvToBean = new CsvToBeanBuilder(reader)
@@ -35,14 +35,12 @@ public class CSVToTutors {
                     .build();
 
             Iterator<TutorBean> csvTutorIterator = csvToBean.iterator();
-            for (Iterator<TutorBean> it = csvTutorIterator; it.hasNext(); ) {
-                TutorBean tutor = it.next();
+            while(csvTutorIterator.hasNext()) {
+                TutorBean tutor = csvTutorIterator.next();
                 logger.info(tutor.getId() + " " + tutor.getFname() + " " + tutor.getLname() + " " + tutor.getEmail());
             }
             List<TutorBean> tutors = (List<TutorBean>) csvTutorIterator;
-
             return tutors;
-
         } catch (IOException e) {
             e.printStackTrace();
         } catch (IllegalStateException e) {

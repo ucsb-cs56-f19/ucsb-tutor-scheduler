@@ -79,4 +79,5 @@ public class TutorControllerUnitTest {
     public void whenCalleddeleteTutor_thenIllegalArgumentException() {
         assertThat(tutorController.deleteTutor(1l, mockedModel)).isEqualTo("index");
     }
+
 }

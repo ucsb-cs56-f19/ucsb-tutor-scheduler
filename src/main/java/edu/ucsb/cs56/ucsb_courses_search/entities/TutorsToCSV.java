@@ -10,7 +10,7 @@ import java.util.List;
 public class TutorsToCSV {
     private static Logger logger = LoggerFactory.getLogger(TutorsToCSV.class);
     public static void writeTutors(PrintWriter writer, List<Tutor> tutors) {
-        String[] CSV_HEADER = {"id", "firstname", "lastname", "email"};
+        String[] CSV_HEADER = {"id", "firstname", "lastname", "email", "level"};
         try (
                 CSVWriter csvWriter = new CSVWriter(writer,
                         CSVWriter.DEFAULT_SEPARATOR,
@@ -25,7 +25,8 @@ public class TutorsToCSV {
                         String.valueOf(tutor.getId()),
                         tutor.getFname(),
                         tutor.getLname(),
-                        tutor.getEmail()
+                        tutor.getEmail(),
+                        tutor.getLevel()
                 };
 
                 csvWriter.writeNext(data);

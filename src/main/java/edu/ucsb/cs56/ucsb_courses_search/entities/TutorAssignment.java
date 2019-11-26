@@ -75,4 +75,34 @@ public class TutorAssignment {
     return true;
   }
 
+   /*
+     * Tutor Assignments sorted by quarter, then course, then role, then name 
+    */
+    static class TutorComparatorByQuarterThenCourseThenRoleThenName implements java.util.Comparator<Tutor> {
+        @Override
+        public int compare(Tutor o1, Tutor o2) {
+            if (o1.getCourseOffering().getQuarter().equals(o2.getCourseOffering().getQuarter())) {
+              if (o1.getCourseOffering().getCourse().equals(o2.getCourseOffering().getCourse())) {
+                if (o1.getTutor().getLevel().equals(o2.getTutor().getLevel())) {
+                  if (o1.getTutor().getLname().equals(o2.getTutor().getLname())) {
+                    return o1.getTutor().getFname().compareTo(o2.getTutor().getFname());
+                  }
+                  else {
+                    return o1.getTutor().getLname().compareTo(o2.getTutor().getLname());
+                  }
+                }
+                else {
+                  return o1.getTutor().getLname().compareTo(o2.getTutor().getLname());
+                }
+              }
+              else {
+                //TODO: a comparison for the course names
+                return o1.getCourseOffering().getCourse().compareTo(o2.getCourseOffering().getCourse());
+              }
+            }
+            else {
+                return Integer.compareTo(Integer.parseInt(o1.getCourseOffering().getQuarter()),Integer.parseInt(o2.getCourseOffering().getQuarter()));
+            }
+        }
+    }
 }

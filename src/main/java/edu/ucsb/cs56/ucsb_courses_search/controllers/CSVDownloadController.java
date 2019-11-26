@@ -25,7 +25,6 @@ public class CSVDownloadController {
     public void downloadCSV(HttpServletResponse response) throws IOException{
         response.setContentType("text/csv");
         response.setHeader("Content-Disposition", "attachment; file=tutors.csv");
-
         List<Tutor> tutors =  (List<Tutor>) tutorRepository.findAll();
 
         TutorsToCSV.writeTutors(response.getWriter(), tutors);

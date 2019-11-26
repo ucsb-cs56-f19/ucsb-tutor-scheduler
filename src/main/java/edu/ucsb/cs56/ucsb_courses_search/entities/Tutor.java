@@ -11,7 +11,6 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Tutor {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

@@ -1,6 +1,7 @@
 package edu.ucsb.cs56.ucsb_courses_search.entities;
 
 import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvBindByPosition;
 import com.opencsv.bean.CsvCustomBindByName;
 
 import java.util.Set;
@@ -13,20 +14,32 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
 public class TutorBean implements java.io.Serializable {
-    @CsvBindByName(column = "id")
+    @CsvBindByPosition(position = 0)
     private long id;
 
-    @CsvBindByName(column = "firstname")
+    @CsvBindByPosition(position = 1)
     private String fname;
 
-    @CsvBindByName(column = "lastname")
+    @CsvBindByPosition(position = 2)
     private String lname;
 
-    @CsvBindByName(column = "email")
+    @CsvBindByPosition(position = 3)
     private String email;
+
+    @CsvBindByPosition(position = 4)
+    private String level;
 
     public TutorBean() {
     }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
     public long getId() {
         return id;
     }

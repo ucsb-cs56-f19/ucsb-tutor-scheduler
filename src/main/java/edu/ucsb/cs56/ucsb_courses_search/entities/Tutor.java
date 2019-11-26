@@ -1,5 +1,7 @@
 package edu.ucsb.cs56.ucsb_courses_search.entities;
 
+import com.opencsv.bean.CsvBindByPosition;
+
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -33,7 +35,12 @@ public class Tutor {
 
     public Tutor() {
     }
-
+    public Tutor(TutorBean bean){
+        this.fname = bean.getFname();
+        this.lname = bean.getLname();
+        this.email = bean.getEmail();
+        this.level = bean.getLevel();
+    }
     public Tutor(String fname, String lname, String email, String level) {
         this.fname = fname;
         this.lname = lname;

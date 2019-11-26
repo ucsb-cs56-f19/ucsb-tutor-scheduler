@@ -84,10 +84,8 @@
                  >Download CSV<i class="fas fa-download"></i
               ></a>
               <form method="POST" action="/tutorCSVUpload" enctype="multipart/form-data">
-                <input type="file" name="file" id="file" />
-                <a href="/tutorCSVUpload">
-                  <button type="submit">Submit</button>
-                </a>
+                <input type="file" name="file"/> <br/><br/>
+                <button type="submit">Submit</button>
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
               </form>
             </div>

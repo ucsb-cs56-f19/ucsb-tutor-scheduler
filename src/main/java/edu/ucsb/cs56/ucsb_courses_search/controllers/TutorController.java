@@ -86,18 +86,5 @@ public class TutorController {
         model.addAttribute("tutors", tutorRepository.findAll());
         return "index";
     }
-    @RequestMapping(path = "/tutorCSVUpload", method = RequestMethod.POST)
-    public String uploadCSV(@RequestParam("file") MultipartFile file, Model model) throws Exception {
-        logger.info(file.getName());
-        if (file.isEmpty()) {
-            return "index";
-        }
-        try{
-            model.addAttribute("file", file);
-            List<TutorBean> tutors = CSVToTutors.tutorBuilder(file.getName());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "index";
-    }
+
 }

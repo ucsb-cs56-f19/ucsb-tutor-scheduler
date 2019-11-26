@@ -220,9 +220,13 @@
               </tbody>
             </table>
           </div>
+            <div class="col-md-5 mt-5">
+              <button type="submit" th:formaction="@{/csv}" class="btn btn-primary" id="Tutor-Assignment">Download CSV</button>
+            </div>
         </div>
       </div>
     </div>
+
     <div th:switch="${roomsModel}" class="container my-5">
         <div class="row">
           <div class="col-md-6">

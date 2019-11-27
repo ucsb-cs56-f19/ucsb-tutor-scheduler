@@ -23,8 +23,7 @@ import java.util.Iterator;
 public class CSVToTutors {
     public static List<Tutor> tutorBuilder(MultipartFile file) throws Exception {
         try {
-            Reader reader = Files.newBufferedReader(Paths.get("/Users/Tanay/tutorCSV.csv"));
-
+                Reader reader = new InputStreamReader(file.getInputStream());
             ColumnPositionMappingStrategy strategy = new ColumnPositionMappingStrategy();
             strategy.setType(TutorBean.class);
             String[] memberFieldsToBindTo = {"id", "firstname", "lastname", "email", "level"};

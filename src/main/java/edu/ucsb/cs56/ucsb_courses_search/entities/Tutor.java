@@ -1,7 +1,5 @@
 package edu.ucsb.cs56.ucsb_courses_search.entities;
 
-import com.opencsv.bean.CsvBindByPosition;
-
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -13,10 +11,10 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Tutor {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     @NotBlank(message = "First Name is mandatory")
     private String fname;
 
@@ -26,26 +24,27 @@ public class Tutor {
     @NotBlank(message = "Email is mandatory")
     private String email;
 
-    @OneToMany(mappedBy = "tutor")
-    private Set<TutorAssignment> tutorAssignments;
-
     @NotBlank(message = "Level is mandatory")
     private String level;
 
+    @OneToMany(mappedBy = "tutor")
+    private Set<TutorAssignment> tutorAssignments;
 
     public Tutor() {
     }
-    public Tutor(TutorBean bean){
-        this.fname = bean.getFname();
-        this.lname = bean.getLname();
-        this.email = bean.getEmail();
-        this.level = bean.getLevel();
-    }
+
     public Tutor(String fname, String lname, String email, String level) {
         this.fname = fname;
         this.lname = lname;
         this.email = email;
         this.level = level;
+    }
+
+    public Tutor(TutorBean bean){
+        this.fname = bean.getFname();
+        this.lname = bean.getLname();
+        this.email = bean.getEmail();
+        this.level = bean.getLevel();
     }
 
     public void setId(long id) {
@@ -72,10 +71,6 @@ public class Tutor {
         this.email = email;
     }
 
-    public String getLevel() {
-        return level;
-    }
-
     public void setLevel(String level) {
         this.level = level;
     }
@@ -90,6 +85,10 @@ public class Tutor {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getLevel() {
+        return level;
     }
 
     @Override

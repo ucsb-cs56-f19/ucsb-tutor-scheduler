@@ -1,5 +1,6 @@
 package edu.ucsb.cs56.ucsb_courses_search.entities;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URI;
 import java.nio.file.Files;
@@ -13,6 +14,7 @@ import com.opencsv.bean.ColumnPositionMappingStrategy;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +26,7 @@ public class CSVToTutors {
     public static List<Tutor> tutorBuilder(MultipartFile file) throws Exception {
         logger.info(file.getOriginalFilename());
         try {
-                Reader reader = Files.newBufferedReader(Paths.get("/Users/Tanay/tutorCSV.csv"));
+                Reader reader = new InputStreamReader(file.getInputStream());
 
             ColumnPositionMappingStrategy strategy = new ColumnPositionMappingStrategy();
             strategy.setType(TutorBean.class);

@@ -24,6 +24,11 @@
     <dependencies>
         <!-- https://stackoverflow.com/questions/52512058/spring-boot-fails-due-to-a-hibernate-error-after-migrating-to-jdk-11 -->
         <dependency>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>4.5</version>
+        </dependency>
+        <dependency>
             <groupId>org.javassist</groupId>
             <artifactId>javassist</artifactId>
             <version>3.23.1-GA</version>

@@ -18,12 +18,21 @@ import edu.ucsb.cs56.ucsb_courses_search.repositories.CourseOfferingRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.http.HttpServletResponse;
+import com.opencsv.CSVWriter;
+import com.opencsv.bean.ColumnPositionMappingStrategy;
+import com.opencsv.bean.StatefulBeanToCsv;
+import com.opencsv.bean.StatefulBeanToCsvBuilder;
+import java.util.List;
+
 @Controller
 public class TutorAssignmentController {
 
   private Logger logger = LoggerFactory.getLogger(TutorAssignmentController.class);
 
+  @Autowired
   private final TutorAssignmentRepository tutorAssignmentRepository;
+
   private final TutorRepository tutorRepository;
   private final CourseOfferingRepository courseOfferingRepository;
 
@@ -53,5 +62,24 @@ public class TutorAssignmentController {
         .orElseThrow(() -> new IllegalArgumentException("Invalid tutor assignment Id:" + id));
     tutorAssignmentRepository.delete(a);
     return "index";
+  }
+
+  @GetMapping("/tutorAssignments/csv")
+  public void downloadCSV(HttpServletResponse response) throws Exception {
+
+    String filename = "tutorAssignment.csv";
+    response.setContentType("text/csv");
+    response.setHeader("Content-Disposition", "attachment; filename=" + filename);
+
+    List<TutorAssignment> tutorAssign = (List<TutorAssignment>) tutorAssignmentRepository.findAll();
+
+    // create Writer and write to csv file
+    // For reference: http://opencsv.sourceforge.net/
+    StatefulBeanToCsv<TutorAssignment> writer = new StatefulBeanToCsvBuilder<TutorAssignment>(response.getWriter())
+          .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
+          .withSeparator(CSVWriter.DEFAULT_SEPARATOR)
+          .withOrderedResults(false)
+          .build();
+    writer.write(tutorAssign);
   }
 }

@@ -1,0 +1,32 @@
+    <div class="row">
+        <div class="form-group col-md-6">
+          <label for="buildingName" class="col-form-label">First Name</label>
+          <input
+            type="text"
+            th:field="*{buildingName}"
+            class="form-control"
+            id="buildingName"
+            placeholder="First Name"
+          />
+          <span
+            th:if="${#fields.hasErrors('buildingName')}"
+            th:errors="*{buildingname}"
+            class="text-danger"
+          ></span>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="roomNumber" class="col-form-label">Room Number</label>
+          <input
+            type="text"
+            th:field="*{roomNumber}"
+            class="form-control"
+            id="roomNumber"
+            placeholder="Room Number"
+          />
+          <span
+            th:if="${#fields.hasErrors('roomNumber')}"
+            th:errors="*{roomNumber}"
+            class="text-danger"
+          ></span>
+        </div>
+      

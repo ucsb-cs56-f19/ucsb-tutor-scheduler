@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TutorRepository extends CrudRepository<Tutor, Long> {
 
-   // List<Tutor> findByFname(String fname);
+    //List<Tutor> findByFname(String fname);
 
 }

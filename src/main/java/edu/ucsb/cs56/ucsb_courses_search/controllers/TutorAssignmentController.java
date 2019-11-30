@@ -81,4 +81,16 @@ public class TutorAssignmentController {
     return "index";
   }
 
+<<<<<<< HEAD
+=======
+
+  @PostMapping(value = "/tutorAssignments/chooseQuarter")
+  public String chooseQuarter(@RequestParam(name = "tutorAssignmentsQuarterFilter", defaultValue="")
+                              String tutorAssignmentsQuarterFilter, Model model) {
+    logger.info("LOOK HERE! tutorAssignmentsQuarterFilter = " + tutorAssignmentsQuarterFilter);
+    model.addAttribute("tutorAssignmentsQuarterFilter", tutorAssignmentsQuarterFilter);
+    return "index";
+  }
+
+>>>>>>> as/kk - updated drop down menu for selecting the quarter to filter the tutorAssignments by
 }

@@ -10,6 +10,8 @@ import java.util.List;
 import edu.ucsb.cs56.ucsb_courses_search.entities.TutorsToCSV;
 import edu.ucsb.cs56.ucsb_courses_search.entities.Tutor;
 import edu.ucsb.cs56.ucsb_courses_search.repositories.TutorRepository;
+import edu.ucsb.cs56.ucsb_courses_search.repositories.CourseOfferingRepository;
+import edu.ucsb.cs56.ucsb_courses_search.repositories.TimeSlotRepository;
 
 //package edu.ucsb.cs56.ucsb_courses_search;
 
@@ -35,15 +37,19 @@ import org.junit.Before;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
-import edu.ucsb.cs56.ucsb_courses_search.controllers.TutorController;
+import edu.ucsb.cs56.ucsb_courses_search.controllers.HomeController;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.authentication;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(TutorController.class)
-public class TutorsToCSVUnitTest {
+@WebMvcTest(HomeController.class)
+public class TutorToCSVUnitTest {
 
     @MockBean
     private static TutorRepository mockTutorRepository;
+    @MockBean
+    private static CourseOfferingRepository mockCourseOfferingRepository;
+    @MockBean
+    private static TimeSlotRepository mockTimeSlotRepository;
 
     /**
      * This configures the test to ONLY load one controller,
@@ -55,8 +61,8 @@ public class TutorsToCSVUnitTest {
     @Configuration
     public static class TestConf {
         @Bean
-        public TutorController tutorController() {
-            return new TutorController(mockTutorRepository);
+        public HomeController homeController() {
+            return new HomeController(mockTutorRepository, mockCourseOfferingRepository, mockTimeSlotRepository);
         }
     }
 

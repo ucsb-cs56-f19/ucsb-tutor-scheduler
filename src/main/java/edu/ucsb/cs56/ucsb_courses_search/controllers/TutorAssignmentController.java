@@ -40,9 +40,7 @@ public class TutorAssignmentController {
     this.courseOfferingRepository = courseOfferingRepository;
   }
 
-  public boolean checkIfAssigned(Iterator<TutorAssignment> iter, long cid){
-    CourseOffering courseOffering = courseOfferingRepository.findById(cid)
-            .orElseThrow(() -> new IllegalArgumentException("Invalid course offering Id:" + cid));
+  public boolean checkIfAssigned(Iterator<TutorAssignment> iter, CourseOffering courseOffering){
     boolean isAssignedQuarter = false;
     for(Iterator<TutorAssignment> it = iter; it.hasNext();) {
       TutorAssignment assignment = it.next();
@@ -63,7 +61,7 @@ public class TutorAssignmentController {
 
     Iterator<TutorAssignment> iter = tutor.getTutorAssignments().iterator();
 
-    boolean isAssignedQuarter = checkIfAssigned(iter, cid);
+    boolean isAssignedQuarter = checkIfAssigned(iter, courseOffering);
 
     if(isAssignedQuarter == true) {
       final String errorIsAssignedQuarter = "Tutor is already assigned a course";

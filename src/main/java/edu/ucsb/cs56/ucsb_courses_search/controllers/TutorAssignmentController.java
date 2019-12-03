@@ -2,13 +2,9 @@ package edu.ucsb.cs56.ucsb_courses_search.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-<<<<<<< HEAD
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
-=======
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
->>>>>>> de62a5e353391cde55ccbd6928b895c14b015639
+
 
 import edu.ucsb.cs56.ucsb_courses_search.entities.TutorAssignment;
 import edu.ucsb.cs56.ucsb_courses_search.entities.Tutor;

@@ -7,4 +7,3 @@ INSERT INTO tutor (fname,lname,email) VALUES ('Zach','Sisco','zachsisco@example.
 INSERT INTO tutor (fname,lname,email) VALUES ('Yinon','Rousso','yinonRousso@example.org');
 INSERT INTO tutor (fname,lname,email) VALUES ('Kate','Perkins','kateperkins@example.org');
 INSERT INTO tutor (fname,lname,email) VALUES ('George','Kripac','Georgekripac@example.org');
-INSERT INTO tutor_assignment (course_offering_id,tutor_id) VALUES (1,1);

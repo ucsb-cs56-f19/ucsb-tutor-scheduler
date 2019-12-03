@@ -48,19 +48,19 @@
     <label for="level" class="col-form-label">Level</label>
     <br/>
     <select
-      name="level"
-      id="level"
-      th:field="*{level}"
-      class="form-control"
+            name="level"
+            id="level"
+            th:field="*{level}"
+            class="form-control"
     >
       <option value="" disabled="disabled">Select Level</option>
       <option value="190J">190J</option>
       <option value="PAID">PAID</option>
     </select>
     <span
-      th:if="${#fields.hasErrors('level')}"
-      th:errors="*{level}"
-      class="text-danger"
+            th:if="${#fields.hasErrors('level')}"
+            th:errors="*{level}"
+            class="text-danger"
     ></span>
-</div>
+  </div>
 </div>

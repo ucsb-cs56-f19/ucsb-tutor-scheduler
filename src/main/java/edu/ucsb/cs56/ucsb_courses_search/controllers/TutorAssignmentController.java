@@ -49,6 +49,7 @@ public class TutorAssignmentController {
       TutorAssignment assignment = it.next();
       if(courseOffering.getQuarter().equals(assignment.getCourseOffering().getQuarter())){
           isAssignedQuarter = true;
+
       }
     }
 

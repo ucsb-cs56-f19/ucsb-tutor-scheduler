@@ -2,8 +2,8 @@ package edu.ucsb.cs56.ucsb_courses_search.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
 
 import edu.ucsb.cs56.ucsb_courses_search.entities.TutorAssignment;
 import edu.ucsb.cs56.ucsb_courses_search.entities.Tutor;
@@ -14,6 +14,9 @@ import edu.ucsb.cs56.ucsb_courses_search.repositories.CourseOfferingRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Iterator;
 
@@ -34,6 +37,19 @@ public class TutorAssignmentController {
     this.courseOfferingRepository = courseOfferingRepository;
   }
 
+  public boolean checkIfAssigned(Iterator<TutorAssignment> iter, long cid){
+    CourseOffering courseOffering = courseOfferingRepository.findById(cid)
+            .orElseThrow(() -> new IllegalArgumentException("Invalid course offering Id:" + cid));
+    boolean isAssignedQuarter = false;
+    for(Iterator<TutorAssignment> it = iter; it.hasNext();) {
+      TutorAssignment assignment = it.next();
+      if(courseOffering.getQuarter().equals(assignment.getCourseOffering().getQuarter())){
+        isAssignedQuarter = true;
+
+      }
+    }
+    return isAssignedQuarter;
+  }
 
   @PostMapping("/tutorAssignments/add")
   public String add(@RequestParam(name = "cid") long cid, @RequestParam(name = "tid") long tid, Model model) {
@@ -42,26 +58,19 @@ public class TutorAssignmentController {
     CourseOffering courseOffering = courseOfferingRepository.findById(cid)
         .orElseThrow(() -> new IllegalArgumentException("Invalid course offering Id:" + cid));
 
-    boolean isAssignedQuarter = false;
-
     Iterator<TutorAssignment> iter = tutor.getTutorAssignments().iterator();
-    for(Iterator<TutorAssignment> it = iter; it.hasNext();) {
-      TutorAssignment assignment = it.next();
-      if(courseOffering.getQuarter().equals(assignment.getCourseOffering().getQuarter())){
-          isAssignedQuarter = true;
 
-      }
-    }
+    boolean isAssignedQuarter = checkIfAssigned(iter, cid);
 
-    if(isAssignedQuarter == false) {
-      TutorAssignment TutorAssignment = new TutorAssignment(tutor, courseOffering);
-      tutorAssignmentRepository.save(TutorAssignment);
-      model.addAttribute("tutorAssignments", tutorAssignmentRepository.findAll());
+    if(isAssignedQuarter == true) {
+      final String errorIsAssignedQuarter = "Tutor is already assigned a course";
+      model.addAttribute("errorIsAssignedQuarter", errorIsAssignedQuarter);
       return "index";
     }
 
-    final String errorIsAssignedQuarter = "Tutor is already assigned a course";
-    model.addAttribute("errorIsAssignedQuarter", errorIsAssignedQuarter);
+    TutorAssignment TutorAssignment = new TutorAssignment(tutor, courseOffering);
+    tutorAssignmentRepository.save(TutorAssignment);
+    model.addAttribute("tutorAssignments", tutorAssignmentRepository.findAll());
     return "index";
   }
 
@@ -72,4 +81,5 @@ public class TutorAssignmentController {
     tutorAssignmentRepository.delete(a);
     return "index";
   }
+
 }

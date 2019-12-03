@@ -44,8 +44,9 @@ public class TutorAssignmentController {
     boolean isAssignedQuarter = false;
 
     Iterator<TutorAssignment> iter = tutor.getTutorAssignments().iterator();
-    while(iter.hasNext()){
-      if(courseOffering.getQuarter().equals(iter.next().getCourseOffering().getQuarter())){
+    for(Iterator<TutorAssignment> it = iter; it.hasNext();) {
+      TutorAssignment assignment = it.next();
+      if(courseOffering.getQuarter().equals(assignment.getCourseOffering().getQuarter())){
         isAssignedQuarter = true;
       }
     }

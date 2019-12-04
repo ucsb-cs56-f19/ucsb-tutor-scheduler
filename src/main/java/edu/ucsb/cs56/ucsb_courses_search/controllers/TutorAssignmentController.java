@@ -38,13 +38,11 @@ public class TutorAssignmentController {
     this.courseOfferingRepository = courseOfferingRepository;
   }
 
-  public boolean checkIfAssigned(Iterator<TutorAssignment> iter, CourseOffering courseOffering){
+  public boolean checkIfAssigned(Iterable<TutorAssignment> iter, CourseOffering courseOffering){
     boolean isAssignedQuarter = false;
-    for(Iterator<TutorAssignment> it = iter; it.hasNext();) {
-      TutorAssignment assignment = it.next();
+    for(TutorAssignment assignment:iter ) {
       if(courseOffering.getQuarter().equals(assignment.getCourseOffering().getQuarter())){
         isAssignedQuarter = true;
-
       }
     }
     return isAssignedQuarter;
@@ -56,7 +54,7 @@ public class TutorAssignmentController {
     CourseOffering courseOffering = courseOfferingRepository.findById(cid)
         .orElseThrow(() -> new IllegalArgumentException("Invalid course offering Id:" + cid));
 
-    Iterator<TutorAssignment> iter = tutor.getTutorAssignments().iterator();
+    Iterable<TutorAssignment> iter = tutor.getTutorAssignments();
 
     boolean isAssignedQuarter = checkIfAssigned(iter, courseOffering);
 

@@ -13,7 +13,7 @@ import javax.validation.constraints.NotBlank;
 public class Tutor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
     @NotBlank(message = "First Name is mandatory")
     private String fname;
 
@@ -44,11 +44,11 @@ public class Tutor {
         this.level = level;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 

@@ -11,7 +11,6 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Tutor {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -32,7 +31,12 @@ public class Tutor {
 
     public Tutor() {
     }
-
+    public Tutor(TutorBean bean){
+        this.fname = bean.getFname();
+        this.lname = bean.getLname();
+        this.email = bean.getEmail();
+        this.level = bean.getLevel();
+    }
     public Tutor(String fname, String lname, String email, String level) {
         this.fname = fname;
         this.lname = lname;

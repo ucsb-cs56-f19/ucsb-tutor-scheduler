@@ -4,37 +4,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.opencsv.CSVWriter;
+import com.opencsv.bean.ColumnPositionMappingStrategy;
+import com.opencsv.bean.StatefulBeanToCsv;
+import com.opencsv.bean.StatefulBeanToCsvBuilder;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TutorsToCSV {
-    private static Logger logger = LoggerFactory.getLogger(TutorsToCSV.class);
     public static void writeTutors(PrintWriter writer, List<Tutor> tutors) {
-        String[] CSV_HEADER = {"id", "firstname", "lastname", "email"};
-        try (
-                CSVWriter csvWriter = new CSVWriter(writer,
-                        CSVWriter.DEFAULT_SEPARATOR,
-                        CSVWriter.NO_QUOTE_CHARACTER,
-                        CSVWriter.DEFAULT_ESCAPE_CHARACTER,
-                        CSVWriter.DEFAULT_LINE_END);
-        ) {
-            csvWriter.writeNext(CSV_HEADER);
-
-            for (Tutor tutor : tutors) {
-                String[] data = {
-                        String.valueOf(tutor.getId()),
-                        tutor.getFname(),
-                        tutor.getLname(),
-                        tutor.getEmail()
-                };
-
-                csvWriter.writeNext(data);
-            }
-            csvWriter.close();
-            logger.info("Write CSV using CSVWriter successfully!");
-        } catch (Exception e) {
-            logger.info("Writing CSV error!");
-            e.printStackTrace();
-        }
+        writer.println("This is a test.");
+        writer.println("If this were a real CSV, it would contain data from the cp object");
     }
 }

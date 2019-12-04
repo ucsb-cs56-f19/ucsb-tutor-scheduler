@@ -192,6 +192,7 @@ id, firstname, lastname, email, level
                 <tr>
                   <th>Start Time</th>
                   <th>End Time</th>
+                  <th>Quarter</th>
                   <th>Edit</th>
                   <th>Delete</th>
                 </tr>
@@ -200,6 +201,7 @@ id, firstname, lastname, email, level
                 <tr th:each="timeSlot : ${timeSlots}">
                   <td th:text="${timeSlot.startTime}"></td>
                   <td th:text="${timeSlot.endTime}"></td>
+                  <td th:text="${timeSlot.quarter}"></td>
                   <td>
                     <a
                       th:href="@{/timeSlots/edit/{id}(id=${timeSlot.id})}"

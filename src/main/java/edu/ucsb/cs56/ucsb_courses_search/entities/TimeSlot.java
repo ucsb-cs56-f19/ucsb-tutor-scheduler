@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 public class TimeSlot {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotBlank(message = "Start time is mandatory (e.g. 06:00PM)")

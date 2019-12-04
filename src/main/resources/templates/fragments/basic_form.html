@@ -80,14 +80,50 @@
               <a href="/tutors/create" class="btn btn-primary"
                 ><i class="fas fa-user-plus ml-2"></i
               ></a>
+
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadModal">Upload file <i class="fas fa-upload"></i
+              ></button>
+
+              <!-- Modal -->
+              <div id="uploadModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Upload CSV</h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                      <p>
+                        Please upload a CSV with the following fields:
+                      </p>
+                      <pre>
+id, firstname, lastname, email, level
+                      </pre>
+                      <!-- Form -->
+                      <form method='post' action='/tutorCSVUpload' enctype="multipart/form-data">
+                        <div class="input-group">
+                          <div class="custom-file">
+                            <input type="file" name='file' accept=".csv" class="custom-file-input" id="inputGroupFile01"
+                                   aria-describedby="inputGroupFileAddon01">
+                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                          </div>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-primary">Upload <i class="fas fa-upload"></i
+                        ></button>
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                      </form>
+                      <!-- Preview-->
+                      <div id='preview'></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <a href="/tutorCSVDownload" class="btn btn-primary"
-              >Download CSV<i class="fas fa-download"></i
+              >Download CSV <i class="fas fa-download"></i
               ></a>
-              <form method="POST" action="/tutorCSVUpload" enctype="multipart/form-data">
-                <input type="file" class="btn btn-primary" name="file" accept=".csv"/> <br/><br/>
-                <button type="submit" class="btn btn-primary">Submit</button>
-                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-              </form>
             </div>
         </div>
       </div>

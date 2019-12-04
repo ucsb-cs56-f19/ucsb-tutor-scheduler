@@ -20,12 +20,16 @@ public class TimeSlot {
     @NotBlank(message = "End time is mandatory (e.g. 06:00PM)")
     private String endTime;
 
+    @NotBlank(message = "Quarter is mandatory (e.g. S19)")
+    private String quarter;
+
     public TimeSlot() {
     }
 
-    public TimeSlot(String startTime, String endTime) {
+    public TimeSlot(String startTime, String endTime, String quarter) {
         this.startTime = startTime;
         this.endTime = endTime;
+        this.quarter = quarter;
     }
 
     public void setId(long id) {
@@ -44,6 +48,10 @@ public class TimeSlot {
         this.endTime = endTime;
     }
 
+    public void setQuarter(String quarter) {
+        this.quarter = quarter;
+    }
+
     public String getStartTime() {
         return startTime;
     }
@@ -52,8 +60,12 @@ public class TimeSlot {
         return endTime;
     }
 
+    public String getQuarter() {
+        return quarter;
+    }
+
     @Override
     public String toString() {
-        return "TimeSlot{" + "id=" + id + ", startTime=" + startTime + ", endTime=" + endTime + '}';
+        return "TimeSlot{" + "id=" + id + ", startTime=" + startTime + ", endTime=" + endTime + ", quarter=" + quarter + '}';
     }
 }

@@ -19,6 +19,9 @@ import edu.ucsb.cs56.ucsb_courses_search.repositories.CourseOfferingRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import javax.validation.Valid;
+import java.lang.NullPointerException;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 
 @Controller
 public class TutorAssignmentController {
@@ -38,14 +41,28 @@ public class TutorAssignmentController {
   }
   
   @GetMapping("/tutorAssignments/create")
-  public String create(TutorAssignment tutorAssignment) {
-       return "tutorAssignments/create";
+  public String create(TutorAssignment tutorAssignment) {	  
+	  return "tutorAssignments/create";
   }
 
  @PostMapping("/tutorAssignments/add")
-   public String addTutorAssignment(TutorAssignment tutorAssignment, BindingResult result, Model model){
-   		if(result.hasErrors()){
-   			return "tutorAssignments/create";
+   public String addTutorAssignment(@Valid TutorAssignment tutorAssignment, BindingResult result, Model model){
+	   try{
+	   Object t = tutorRepository.findById(tutorAssignment.getTutor().getId());
+	   }
+	   catch(NullPointerException e){
+		result.addError(new FieldError("Tutor","tutor", "Tutor doesn't exist"));
+	   } 
+	  
+	   try{
+	   Object c = courseOfferingRepository.findById(tutorAssignment.getCourseOffering().getId());
+	   }
+	   catch(NullPointerException e){
+		result.addError(new FieldError("CourseOffering","courseOffering", "Course offering doesn't exist"));
+	   } 
+
+	   if(result.hasErrors()){
+		    return "tutorAssignments/create";
    		}
    
    		tutorAssignmentRepository.save(tutorAssignment);

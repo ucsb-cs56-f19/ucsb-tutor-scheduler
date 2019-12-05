@@ -1,12 +1,12 @@
 <div class="row">
   <div class="form-group col-md-6">
-    <label for="tutor" class="col-form-label">Tutor Name</label>
+    <label for="tutor" class="col-form-label">Tutor ID</label>
     <input
       type="text"
       th:field="*{tutor}"
       class="form-control"
       id="tutor"
-      placeholder="Tutor Name"
+      placeholder="Tutor ID"
     />
     <span
       th:if="${#fields.hasErrors('tutor')}"
@@ -15,13 +15,13 @@
     ></span>
   </div>
   <div class="form-group col-md-6">
-    <label for="fname" class="col-form-label">Course Title</label>
+    <label for="fname" class="col-form-label">Course ID</label>
     <input
       type="text"
       th:field="*{courseOffering}"
       class="form-control"
       id="courseOffering"
-      placeholder="Course Title"
+      placeholder="Course ID"
     />
     <span
       th:if="${#fields.hasErrors('courseOffering')}"

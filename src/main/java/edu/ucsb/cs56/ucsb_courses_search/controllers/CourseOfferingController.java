@@ -35,6 +35,12 @@ public class CourseOfferingController {
     public String create(CourseOffering courseOffering) {
         return "courseOfferings/create";
     }
+
+    @GetMapping("/courseOfferings/mainCourse")
+    public String mainCourse(CourseOffering courseOffering) {
+        return "courseOfferings/mainCourse";
+    }
+
     public boolean checkIfCourseExists(Iterable<CourseOffering> iter, CourseOffering courseOffering){
         boolean courseExists = false;
         for(CourseOffering course : iter) {
@@ -43,6 +49,7 @@ public class CourseOfferingController {
             }
         }
         return courseExists;
+
     }
     @PostMapping("/courseOfferings/add")
     public String add(@Valid CourseOffering courseOffering, BindingResult result, Model model) {

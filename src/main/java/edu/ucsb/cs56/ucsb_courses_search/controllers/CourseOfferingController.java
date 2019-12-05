@@ -32,7 +32,10 @@ public class CourseOfferingController {
     public String create(CourseOffering courseOffering) {
         return "courseOfferings/create";
     }
-
+    @GetMapping("/courseOfferings/mainCourse")
+    public String mainCourse(CourseOffering courseOffering) {
+        return "courseOfferings/mainCourse";
+    }
     @PostMapping("/courseOfferings/add")
     public String add(@Valid CourseOffering courseOffering, BindingResult result, Model model) {
         if (result.hasErrors()) {

@@ -37,11 +37,11 @@ public class CourseOffering {
         this.instructor = instructor;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -77,6 +77,18 @@ public class CourseOffering {
     public String toString() {
         return "CourseOffering{" + "id=" + id + ", course=" + course + ", quarter=" + quarter + ", instructor="
                 + instructor + '}';
+    }
+    public boolean equals(CourseOffering c2){
+        if(!(this.course.equals(c2.getCourse()))){
+            return false;
+        }
+        if(!(this.quarter.equals(c2.getQuarter()))){
+            return false;
+        }
+        if(!(this.instructor.equals(c2.getInstructor()))){
+            return false;
+        }
+        return true;
     }
     @Override
     public boolean equals(Object obj){

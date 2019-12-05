@@ -11,3 +11,4 @@ INSERT INTO tutor_assignment (course_offering_id,tutor_id) VALUES (1,1);
 INSERT INTO tutor_assignment (course_offering_id,tutor_id) VALUES (2,2);
 INSERT INTO tutor_assignment (course_offering_id,tutor_id) VALUES (3,3);
 INSERT INTO tutor_assignment (course_offering_id,tutor_id) VALUES (4,4);
+INSERT INTO time_slot (start_time,end_time,quarter) VALUES ('06:00PM','07:00PM','F19');

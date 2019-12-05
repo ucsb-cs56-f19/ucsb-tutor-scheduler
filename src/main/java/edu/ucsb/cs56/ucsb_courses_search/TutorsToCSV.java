@@ -1,10 +1,11 @@
-package edu.ucsb.cs56.ucsb_courses_search.entities;
-import java.io.PrintWriter;
+package edu.ucsb.cs56.ucsb_courses_search;
+
+import com.opencsv.CSVWriter;
+import edu.ucsb.cs56.ucsb_courses_search.entities.Tutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.opencsv.CSVWriter;
-
+import java.io.PrintWriter;
 import java.util.List;
 
 public class TutorsToCSV {

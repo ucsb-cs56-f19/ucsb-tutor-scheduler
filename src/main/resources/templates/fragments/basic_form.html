@@ -186,9 +186,11 @@
             <h2 class="my-5">Tutor Assignments</h2>
             <form action ="#" th:action="@{/tutorAssignments/chooseQuarter}" method="POST">
               <select name="tutorAssignmentsQuarterFilter">
+                  <option th:value="ChooseQuarter">Choose Quarter</option>
                   <option th:value="W20">Winter 2020</option>
                   <option th:value="F19">Fall 2019</option>
               </select>
+              
               <input type="submit" value="Submit">
             </form>
             <br>

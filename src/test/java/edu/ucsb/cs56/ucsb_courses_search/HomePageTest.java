@@ -1,44 +1,44 @@
-
-
 package edu.ucsb.cs56.ucsb_courses_search;
 
 // import static org.hamcrest.Matchers.equalTo;
-        import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-        import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import edu.ucsb.cs56.ucsb_courses_search.controllers.HomeController;
+import edu.ucsb.cs56.ucsb_courses_search.repositories.CourseOfferingRepository;
+import edu.ucsb.cs56.ucsb_courses_search.repositories.TimeSlotRepository;
+import edu.ucsb.cs56.ucsb_courses_search.repositories.TutorRepository;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.authentication;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 // import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder.andExpect;
-
-        import edu.ucsb.cs56.ucsb_courses_search.controllers.HomeController;
-        import org.junit.Test;
-        import org.junit.runner.RunWith;
-        import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.http.MediaType;
-        import org.springframework.test.context.junit4.SpringRunner;
-        import org.springframework.test.web.servlet.MockMvc;
-        import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-        import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
-        import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-        import org.springframework.boot.test.mock.mockito.MockBean;
-        import org.springframework.context.annotation.Bean;
-        import org.springframework.context.annotation.Configuration;
-        import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.xpath;
-
-        import org.junit.Before;
-        import org.springframework.security.test.context.support.WithMockUser;
-        import org.springframework.security.oauth2.core.user.OAuth2User;
-
-        import edu.ucsb.cs56.ucsb_courses_search.controllers.TutorController;
-        import edu.ucsb.cs56.ucsb_courses_search.repositories.TutorRepository;
-        import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.authentication;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(HomeController.class)
 public class HomePageTest {
 
-    /*
     @MockBean
     private static TutorRepository mockTutorRepository;
 
-     */
+    @MockBean
+    private static CourseOfferingRepository mockCourseOfferingRepository;
+
+    @MockBean
+    private static TimeSlotRepository mockTimeSlotRepository;
 
     /**
      * This configures the test to ONLY load one controller,
@@ -46,27 +46,22 @@ public class HomePageTest {
      * mocked and stubbed.   See https://stackoverflow.com/a/45228072
      * plus the comments underneath about Configuration.
      */
-    /*
     @Configuration
     public static class TestConf {
         @Bean
-        public TutorController tutorController() {
-            return new TutorController(mockTutorRepository);
+        public HomeController homeController() {
+            return new HomeController(mockTutorRepository, mockCourseOfferingRepository, mockTimeSlotRepository);
         }
     }
-    */
 
     @Autowired
     private MockMvc mvc;
 
-    /*
     @MockBean
     private AuthControllerAdvice aca;
 
     @MockBean
     private ClientRegistrationRepository crr;
-
-     */
 
     private OAuth2User principal;
 

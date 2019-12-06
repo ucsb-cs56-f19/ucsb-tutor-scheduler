@@ -1,4 +1,4 @@
-package edu.ucsb.cs56.ucsb_courses_search;;
+package edu.ucsb.cs56.ucsb_courses_search;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;

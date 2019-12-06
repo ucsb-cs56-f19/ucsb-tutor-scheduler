@@ -15,7 +15,8 @@ import edu.ucsb.cs56.ucsb_courses_search.entities.CourseOffering;
 import edu.ucsb.cs56.ucsb_courses_search.entities.Rooms;
 import edu.ucsb.cs56.ucsb_courses_search.entities.TimeSlot;
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
 
 @ControllerAdvice
 public class RepositoryControllerAdvice {
@@ -56,7 +57,12 @@ public class RepositoryControllerAdvice {
 
     @ModelAttribute("tutorAssignments")
     public Iterable<TutorAssignment> getTutorAssignments() {
-        return tutorAssignmentRepository.findAll();
+        ArrayList<TutorAssignment> sortedTAs = new ArrayList<>();
+        for(TutorAssignment i : tutorAssignmentRepository.findAll()) {
+            sortedTAs.add(i);
+        }
+        Collections.sort(sortedTAs);
+        return sortedTAs;
     }
 
     @ModelAttribute("roomsModel")

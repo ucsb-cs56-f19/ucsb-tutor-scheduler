@@ -33,6 +33,11 @@ public class RoomsController {
         return "rooms/create";
     }
 
+    @GetMapping("/rooms/roomsPage")
+    public String roomsPage(Rooms rooms) {
+        return "rooms/roomsPage";
+    }
+
     @PostMapping("/rooms/add")
     public String addRooms(@Valid Rooms rooms, BindingResult result, Model model) {
         if (result.hasErrors()) {

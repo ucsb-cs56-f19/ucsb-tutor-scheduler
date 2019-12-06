@@ -33,6 +33,11 @@ public class TimeSlotController {
         return "timeSlots/create";
     }
 
+    @GetMapping("/timeSlots/timeSlotsPage")
+    public String timeSlotsPage(TimeSlot timeSlot) {
+        return "timeSlots/timeSlotsPage";
+    }
+
     @PostMapping("/timeSlots/add")
     public String addTimeSlot(@Valid TimeSlot timeSlot, BindingResult result, Model model) {
         // if (result.hasErrors()) {

@@ -31,6 +31,16 @@ public class TutorController {
         return "tutors/create";
     }
 
+    @GetMapping("/tutors/tutorsPage")
+    public String tutorsPage(Tutor tutor) {
+        return "tutors/tutorsPage";
+    }
+
+    @GetMapping("/tutors/tutorsAssignmentPage")
+    public String tutorAssignmentPage(Tutor tutor) {
+        return "tutors/tutorsAssignmentPage";
+    }
+
     @PostMapping("/tutors/add")
     public String addTutor(@Valid Tutor tutor, BindingResult result, Model model) {
         if (result.hasErrors()) {

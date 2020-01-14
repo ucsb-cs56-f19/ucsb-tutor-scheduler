@@ -26,6 +26,11 @@ public class TutorController {
         this.tutorRepository = tutorRepository;
     }
 
+    @GetMapping("/tutors/tutorsPage")
+    public String tutorsPage(Model model) {
+        return "tutors/tutorsPage";
+    }
+
     @GetMapping("/tutors/create")
     public String create(Tutor tutor) {
         return "tutors/create";

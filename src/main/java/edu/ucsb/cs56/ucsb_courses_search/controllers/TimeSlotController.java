@@ -28,6 +28,11 @@ public class TimeSlotController {
         this.timeSlotRepository = timeSlotRepository;
     }
 
+    @GetMapping("/timeSlots/timeSlotsPage")
+    public String timeSlotsPage(Model model) {
+        return "timeSlots/timeSlotsPage";
+    }
+
     @GetMapping("/timeSlots/create")
     public String create(TimeSlot timeSlot) {
         return "timeSlots/create";

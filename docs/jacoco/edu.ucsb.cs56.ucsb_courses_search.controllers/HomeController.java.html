@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HomeController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ucsb_courses_search</a> &gt; <a href="index.source.html" class="el_package">edu.ucsb.cs56.ucsb_courses_search.controllers</a> &gt; <span class="el_source">HomeController.java</span></div><h1>HomeController.java</h1><pre class="source lang-java linenums">package edu.ucsb.cs56.ucsb_courses_search.controllers;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.client.registration.ClientRegistration;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.oauth2.core.user.OAuth2User;
+import java.util.Map;
+import java.util.HashMap;
+
+import edu.ucsb.cs56.ucsb_courses_search.entities.Tutor;
+import edu.ucsb.cs56.ucsb_courses_search.repositories.TutorRepository;
+import edu.ucsb.cs56.ucsb_courses_search.repositories.CourseOfferingRepository;
+import edu.ucsb.cs56.ucsb_courses_search.repositories.TimeSlotRepository;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+@Controller
+public class HomeController {
+
+<span class="nc" id="L30">    private Logger logger = LoggerFactory.getLogger(TutorController.class);</span>
+
+    private final TutorRepository tutorRepository;
+    private final CourseOfferingRepository courseOfferingRepository;
+    private final TimeSlotRepository timeSlotRepository;
+    
+    @Autowired
+    private ClientRegistrationRepository clientRegistrationRepository;
+
+
+    @Autowired
+    public HomeController(TutorRepository tutorRepository, CourseOfferingRepository courseOfferingRepository,
+<span class="nc" id="L42">        TimeSlotRepository timeSlotRepository) {</span>
+<span class="nc" id="L43">        this.tutorRepository = tutorRepository;</span>
+<span class="nc" id="L44">        this.courseOfferingRepository = courseOfferingRepository;</span>
+<span class="nc" id="L45">        this.timeSlotRepository = timeSlotRepository;</span>
+<span class="nc" id="L46">    }</span>
+
+    @GetMapping(&quot;/&quot;)
+    public String home(Model model, OAuth2AuthenticationToken oAuth2AuthenticationToken) {
+<span class="nc" id="L50">        logger.info(&quot;Entering HomeController.home.  model=&quot; + model.toString());</span>
+        // model.addAttribute(&quot;tutors&quot;, tutorRepository.findAll());
+        // model.addAttribute(&quot;courseOfferings&quot;, courseOfferingRepository.findAll());
+<span class="nc" id="L53">        logger.info(&quot;Exiting HomeController.home.  model=&quot; + model.toString());</span>
+<span class="nc" id="L54">        return &quot;index&quot;;</span>
+    }
+
+    @GetMapping(&quot;/login&quot;)
+    public String getLoginPage(Model model, OAuth2AuthenticationToken oAuth2AuthenticationToken) {
+
+<span class="nc" id="L60">        Map&lt;String, String&gt; urls = new HashMap&lt;&gt;();</span>
+
+        // get around an unfortunate limitation of the API
+<span class="nc" id="L63">        @SuppressWarnings(&quot;unchecked&quot;) Iterable&lt;ClientRegistration&gt; iterable = ((Iterable&lt;ClientRegistration&gt;) clientRegistrationRepository);</span>
+<span class="nc" id="L64">        iterable.forEach(clientRegistration -&gt; urls.put(clientRegistration.getClientName(),</span>
+<span class="nc" id="L65">                &quot;/oauth2/authorization/&quot; + clientRegistration.getRegistrationId()));</span>
+
+<span class="nc" id="L67">        model.addAttribute(&quot;urls&quot;, urls);</span>
+<span class="nc" id="L68">        logger.info(&quot;GOING TO LOGIN&quot;);</span>
+<span class="nc" id="L69">        return &quot;login&quot;;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

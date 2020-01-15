@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CourseOfferingController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ucsb_courses_search</a> &gt; <a href="index.source.html" class="el_package">edu.ucsb.cs56.ucsb_courses_search.controllers</a> &gt; <span class="el_source">CourseOfferingController.java</span></div><h1>CourseOfferingController.java</h1><pre class="source lang-java linenums">package edu.ucsb.cs56.ucsb_courses_search.controllers;
+
+import javax.validation.Valid;
+
+import edu.ucsb.cs56.ucsb_courses_search.entities.TutorAssignment;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import edu.ucsb.cs56.ucsb_courses_search.entities.CourseOffering;
+import edu.ucsb.cs56.ucsb_courses_search.repositories.CourseOfferingRepository;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Iterator;
+
+@Controller
+public class CourseOfferingController {
+
+<span class="nc" id="L25">    private Logger logger = LoggerFactory.getLogger(CourseOfferingController.class);</span>
+
+    private final CourseOfferingRepository courseOfferingRepository;
+
+    @Autowired
+<span class="nc" id="L30">    public CourseOfferingController(CourseOfferingRepository courseOfferingRepository) {</span>
+<span class="nc" id="L31">        this.courseOfferingRepository = courseOfferingRepository;</span>
+<span class="nc" id="L32">    }</span>
+
+    @GetMapping(&quot;/courseOfferings/create&quot;)
+    public String create(CourseOffering courseOffering) {
+<span class="nc" id="L36">        return &quot;courseOfferings/create&quot;;</span>
+    }
+
+    @GetMapping(&quot;/courseOfferings/mainCourse&quot;)
+    public String mainCourse(CourseOffering courseOffering) {
+<span class="nc" id="L41">        return &quot;courseOfferings/mainCourse&quot;;</span>
+    }
+
+    public boolean checkIfCourseExists(Iterable&lt;CourseOffering&gt; iter, CourseOffering courseOffering){
+<span class="nc" id="L45">        boolean courseExists = false;</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">        for(CourseOffering course : iter) {</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">            if(courseOffering.equals(course)){</span>
+<span class="nc" id="L48">                courseExists = true;</span>
+            }
+<span class="nc" id="L50">        }</span>
+<span class="nc" id="L51">        return courseExists;</span>
+
+    }
+    @PostMapping(&quot;/courseOfferings/add&quot;)
+    public String add(@Valid CourseOffering courseOffering, BindingResult result, Model model) {
+<span class="nc bnc" id="L56" title="All 2 branches missed.">        if (result.hasErrors()) {</span>
+<span class="nc" id="L57">            return &quot;courseOfferings/create&quot;;</span>
+        }
+<span class="nc" id="L59">        Iterable&lt;CourseOffering&gt; iter = courseOfferingRepository.findAll();</span>
+<span class="nc" id="L60">        boolean courseExists = checkIfCourseExists(iter, courseOffering);</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">        if(courseExists == true){</span>
+<span class="nc" id="L62">            final String errorCourseExists = &quot;Course already exists for this quarter&quot;;</span>
+<span class="nc" id="L63">            model.addAttribute(&quot;errorCourseExists&quot;, errorCourseExists);</span>
+<span class="nc" id="L64">            return &quot;index&quot;;</span>
+        }
+<span class="nc" id="L66">        courseOfferingRepository.save(courseOffering);</span>
+<span class="nc" id="L67">        model.addAttribute(&quot;courseOfferings&quot;, courseOfferingRepository.findAll());</span>
+<span class="nc" id="L68">        return &quot;index&quot;;</span>
+    }
+
+    @GetMapping(&quot;/courseOfferings/edit/{id}&quot;)
+    public String showUpdateForm(@PathVariable(&quot;id&quot;) long id, Model model) {
+<span class="nc" id="L73">        CourseOffering courseOffering = courseOfferingRepository.findById(id)</span>
+<span class="nc" id="L74">                .orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid course offering Id:&quot; + id));</span>
+<span class="nc" id="L75">        model.addAttribute(&quot;courseOffering&quot;, courseOffering);</span>
+<span class="nc" id="L76">        return &quot;courseOfferings/update&quot;;</span>
+    }
+
+    @PostMapping(&quot;/courseOfferings/update/{id}&quot;)
+    public String update(@PathVariable(&quot;id&quot;) long id, @Valid CourseOffering courseOffering, BindingResult result,
+            Model model) {
+<span class="nc bnc" id="L82" title="All 2 branches missed.">        if (result.hasErrors()) {</span>
+<span class="nc" id="L83">            courseOffering.setId(id);</span>
+<span class="nc" id="L84">            return &quot;courseOfferings/update&quot;;</span>
+        }
+
+<span class="nc" id="L87">        courseOfferingRepository.save(courseOffering);</span>
+<span class="nc" id="L88">        return &quot;index&quot;;</span>
+    }
+
+    @GetMapping(&quot;/courseOfferings/delete/{id}&quot;)
+    public String delete(@PathVariable(&quot;id&quot;) long id, Model model) {
+<span class="nc" id="L93">        CourseOffering courseOffering = courseOfferingRepository.findById(id)</span>
+<span class="nc" id="L94">                .orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid courseoffering Id:&quot; + id));</span>
+<span class="nc" id="L95">        courseOfferingRepository.delete(courseOffering);</span>
+<span class="nc" id="L96">        model.addAttribute(&quot;courseOfferings&quot;, courseOfferingRepository.findAll());</span>
+<span class="nc" id="L97">        return &quot;index&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

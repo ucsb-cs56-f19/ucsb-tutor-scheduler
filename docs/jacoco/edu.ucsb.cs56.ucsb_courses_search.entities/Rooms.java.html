@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Rooms.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ucsb_courses_search</a> &gt; <a href="index.source.html" class="el_package">edu.ucsb.cs56.ucsb_courses_search.entities</a> &gt; <span class="el_source">Rooms.java</span></div><h1>Rooms.java</h1><pre class="source lang-java linenums">package edu.ucsb.cs56.ucsb_courses_search.entities;
+
+import java.util.Set;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+//import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
+
+@Entity
+public class Rooms {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @NotBlank(message = &quot;Building Name is mandatory&quot;)
+    private String buildingName;
+
+    @NotBlank(message = &quot;Room Number is mandatory&quot;)
+    private int roomNumber;
+
+<span class="nc" id="L24">    public Rooms() {</span>
+<span class="nc" id="L25">    }</span>
+
+<span class="nc" id="L27">    public Rooms(String buildingName, int roomNumber) {</span>
+<span class="nc" id="L28">        this.buildingName = buildingName;</span>
+<span class="nc" id="L29">        this.roomNumber = roomNumber;</span>
+<span class="nc" id="L30">    }</span>
+
+    public void setId(long id) {
+<span class="nc" id="L33">        this.id = id;</span>
+<span class="nc" id="L34">    }</span>
+
+    public long getId() {
+<span class="nc" id="L37">        return id;</span>
+    }
+
+    public void setbuildingName(String buildingName) {
+<span class="nc" id="L41">        this.buildingName = buildingName;</span>
+<span class="nc" id="L42">    }</span>
+
+    public void setroomNumber(int roomNumber) {
+<span class="nc" id="L45">        this.roomNumber = roomNumber;</span>
+<span class="nc" id="L46">    }</span>
+
+    public String getbuildingName() {
+<span class="nc" id="L49">        return buildingName;</span>
+    }
+
+    public int getroomNumber() {
+<span class="nc" id="L53">        return roomNumber;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L58">        return &quot;Room{&quot; + &quot;id=&quot; + id + &quot;, buildingName=&quot; + buildingName + &quot;, roomNumber=&quot; + roomNumber + '}';</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

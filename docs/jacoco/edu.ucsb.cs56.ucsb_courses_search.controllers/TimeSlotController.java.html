@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TimeSlotController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ucsb_courses_search</a> &gt; <a href="index.source.html" class="el_package">edu.ucsb.cs56.ucsb_courses_search.controllers</a> &gt; <span class="el_source">TimeSlotController.java</span></div><h1>TimeSlotController.java</h1><pre class="source lang-java linenums">package edu.ucsb.cs56.ucsb_courses_search.controllers;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import edu.ucsb.cs56.ucsb_courses_search.entities.TimeSlot;
+import edu.ucsb.cs56.ucsb_courses_search.repositories.TimeSlotRepository;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+@Controller
+public class TimeSlotController {
+
+<span class="nc" id="L22">    private Logger logger = LoggerFactory.getLogger(TimeSlotController.class);</span>
+
+    private final TimeSlotRepository timeSlotRepository;
+
+    @Autowired
+<span class="nc" id="L27">    public TimeSlotController(TimeSlotRepository timeSlotRepository) {</span>
+<span class="nc" id="L28">        this.timeSlotRepository = timeSlotRepository;</span>
+<span class="nc" id="L29">    }</span>
+
+    @GetMapping(&quot;/timeSlots/timeSlotsPage&quot;)
+    public String timeSlotsPage(Model model) {
+<span class="nc" id="L33">        return &quot;timeSlots/timeSlotsPage&quot;;</span>
+    }
+
+    @GetMapping(&quot;/timeSlots/create&quot;)
+    public String create(TimeSlot timeSlot) {
+<span class="nc" id="L38">        return &quot;timeSlots/create&quot;;</span>
+    }
+
+    @PostMapping(&quot;/timeSlots/add&quot;)
+    public String addTimeSlot(@Valid TimeSlot timeSlot, BindingResult result, Model model) {
+        // if (result.hasErrors()) {
+        //     return &quot;timeSlots/create&quot;;
+        // }
+<span class="nc" id="L46">        result.hasErrors();</span>
+
+<span class="nc" id="L48">        timeSlotRepository.save(timeSlot);</span>
+<span class="nc" id="L49">        model.addAttribute(&quot;timeSlots&quot;, timeSlotRepository.findAll());</span>
+<span class="nc" id="L50">        return &quot;index&quot;;</span>
+    }
+
+    @GetMapping(&quot;/timeSlots/edit/{id}&quot;)
+    public String showUpdateForm(@PathVariable(&quot;id&quot;) long id, Model model) {
+<span class="nc" id="L55">        TimeSlot timeSlot = timeSlotRepository.findById(id)</span>
+<span class="nc" id="L56">                .orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid time slot Id:&quot; + id));</span>
+<span class="nc" id="L57">        model.addAttribute(&quot;timeSlot&quot;, timeSlot);</span>
+<span class="nc" id="L58">        return &quot;timeSlots/update&quot;;</span>
+    }
+
+    @PostMapping(&quot;/timeSlots/update/{id}&quot;)
+    public String updateTimeSlot(@PathVariable(&quot;id&quot;) long id, @Valid TimeSlot timeSlot, BindingResult result, Model model) {
+<span class="nc bnc" id="L63" title="All 2 branches missed.">        if (result.hasErrors()) {</span>
+<span class="nc" id="L64">            timeSlot.setId(id);</span>
+<span class="nc" id="L65">            return &quot;timeSlots/update&quot;;</span>
+        }
+
+<span class="nc" id="L68">        timeSlotRepository.save(timeSlot);</span>
+<span class="nc" id="L69">        return &quot;index&quot;;</span>
+    }
+
+    @GetMapping(&quot;/timeSlots/delete/{id}&quot;)
+    public String deleteTimeSlot(@PathVariable(&quot;id&quot;) long id, Model model) {
+<span class="nc" id="L74">        TimeSlot timeSlot = timeSlotRepository.findById(id)</span>
+<span class="nc" id="L75">                .orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid time slot Id:&quot; + id));</span>
+<span class="nc" id="L76">        timeSlotRepository.delete(timeSlot);</span>
+<span class="nc" id="L77">        model.addAttribute(&quot;timeSlots&quot;, timeSlotRepository.findAll());</span>
+<span class="nc" id="L78">        return &quot;index&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

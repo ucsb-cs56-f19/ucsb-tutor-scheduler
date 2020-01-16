@@ -56,4 +56,30 @@ public class TutorUnitTest {
         Tutor tutor = new Tutor("Julie", "Smith", "julie@domain.com", "PAID");
         assertThat(tutor.toString()).isEqualTo("Tutor{id=0, fname=Julie, lname=Smith, email=julie@domain.com, level=PAID}");
     }
+
+    @Test
+    public void whenCalledGetLevel_thenCorrect() {
+        Tutor tutor = new Tutor("Julie", "Smith", "julie@domain.com", "190J");
+        tutor.setLevel("PAID");
+        assertThat(tutor.getLevel()).isEqualTo("PAID");
+    }
+
+    @Test
+    public void whenCalledGetId_thenCorrect() {
+        Tutor tutor = new Tutor("Julie", "Smith", "julie@domain.com", "PAID");
+        tutor.setId(1);
+        assertThat(tutor.getId()).isEqualTo(1);
+    }
+
+    @Test
+    public void whenCalledGetTutorAssignments_thenCorrect(){
+        Tutor tutor = new Tutor("Julie", "Smith", "julie@domain.com", "PAID");
+        CourseOffering course = new CourseOffering("CS56", "W20", "Conrad");
+        Set<TutorAssignment> ta = new Set<TutorAssignment>(new TutorAssignment(tutor, course));
+
+        tutor.tutorAssignments = ta;
+        assertThat(tutor.getTutorAssignments()).isEqualTo(ta);
+    }
+
+    
 }

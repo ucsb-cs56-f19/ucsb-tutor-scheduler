@@ -1,9 +1,4 @@
-# ucsb-courses-search
-
-A project to:
-* first build a clone of the page <https://my.sa.ucsb.edu/public/curriculum/coursesearch.aspx>
-* then build many additional features using the same data.
-
+# ucsb-tutor-scheduler
 
 | Type this | to get this result |
 |-----------|------------|

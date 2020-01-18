@@ -1,7 +1,7 @@
-INSERT INTO course_offering (course,quarter,instructor) VALUES ('CMPSC 16','F19','Mirza');
-INSERT INTO course_offering (course,quarter,instructor) VALUES ('CMPSC 160','F19','Ding');
-INSERT INTO course_offering (course,quarter,instructor) VALUES ('CMPSC 130A','W20','Koc');
-INSERT INTO course_offering (course,quarter,instructor) VALUES ('CMPSC 130B','W20','Lokshtanov');
+INSERT INTO course_offering (course,quarter,instructor) VALUES ('CMPSC 16','20194','Mirza');
+INSERT INTO course_offering (course,quarter,instructor) VALUES ('CMPSC 160','20194','Ding');
+INSERT INTO course_offering (course,quarter,instructor) VALUES ('CMPSC 130A','20201','Koc');
+INSERT INTO course_offering (course,quarter,instructor) VALUES ('CMPSC 130B','20201','Lokshtanov');
 INSERT INTO tutor (fname,lname,email,level) VALUES ('Scott','Chow','scottpchow@example.org','PAID');
 INSERT INTO tutor (fname,lname,email,level) VALUES ('Zach','Sisco','zachsisco@example.org','PAID');
 INSERT INTO tutor (fname,lname,email,level) VALUES ('Yinon','Rousso','yinonRousso@example.org','190J');

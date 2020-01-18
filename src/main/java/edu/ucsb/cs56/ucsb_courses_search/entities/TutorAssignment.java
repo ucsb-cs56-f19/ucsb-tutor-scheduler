@@ -8,7 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class TutorAssignment {
+public class TutorAssignment implements Comparable<TutorAssignment>{
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -75,4 +75,28 @@ public class TutorAssignment {
     return true;
   }
 
+  /*
+   * Tutor Assignments sorted by quarter, then course, then role, then name
+   */
+  public int compareTo(TutorAssignment o) {
+    if (this.getCourseOffering().getQuarter().equals(o.getCourseOffering().getQuarter())) {
+      if (this.getCourseOffering().getCourse().equals(o.getCourseOffering().getCourse())) {
+        if (this.getTutor().getLevel().equals(o.getTutor().getLevel())) {
+          if (this.getTutor().getLname().equals(o.getTutor().getLname())) {
+            return this.getTutor().getFname().compareTo(o.getTutor().getFname());
+          } else {
+            return this.getTutor().getLname().compareTo(o.getTutor().getLname());
+          }
+        } else {
+          return this.getTutor().getLname().compareTo(o.getTutor().getLname());
+        }
+      } else {
+        // TODO: a comparison for the course names
+        return this.getCourseOffering().getCourse().compareTo(o.getCourseOffering().getCourse());
+      }
+    } else {
+      return Integer.compare(Integer.parseInt(this.getCourseOffering().getQuarter()),
+          Integer.parseInt(o.getCourseOffering().getQuarter()));
+    }
+  }
 }

@@ -27,6 +27,11 @@ public class RoomsController {
     public RoomsController(RoomsRepository roomsRepository) {
         this.roomsRepository = roomsRepository;
     }
+    
+    @GetMapping("/rooms/roomsPage")
+    public String roomsPage(Rooms rooms) {
+        return "rooms/roomsPage";
+    }
 
     @GetMapping("/rooms/create")
     public String create(Rooms rooms) {
